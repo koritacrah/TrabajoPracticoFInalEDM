@@ -1,5 +1,5 @@
 package ar.edu.unju.edm.controller;
 
-public class productocontroller {
+public class TuristaController {
 int num;
 }
