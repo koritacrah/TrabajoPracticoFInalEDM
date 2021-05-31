@@ -37,7 +37,7 @@ public class PoIsServiceMYSQL implements IPoIsService{
 	@Override
 	public void modificarPoI(PoIs PoIModificado) throws Exception {
 		// TODO Auto-generated method stub
-		PoIs PoIaModificar = IPoIsDAO.findBycodPoI(PoIModificado.getCodigoPoI()).orElseThrow(()->new Exception("El punto de interes no fue encontrado"));
+		PoIs PoIaModificar = IPoIsDAO.findBycodPoI(PoIModificado.getCodPoI()).orElseThrow(()->new Exception("El punto de interes no fue encontrado"));
 		cambiarPoI(PoIModificado, PoIaModificar);
 		IPoIsDAO.save(PoIaModificar);
 	}
