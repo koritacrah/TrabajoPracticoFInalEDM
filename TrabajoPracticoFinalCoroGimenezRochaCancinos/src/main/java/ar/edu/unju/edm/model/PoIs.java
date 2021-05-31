@@ -1,15 +1,23 @@
 package ar.edu.unju.edm.model;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
+@Entity
+@Table (name="PoIs")
+@Component
 public class PoIs {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	private Integer CodigoPoI;
+	private Integer codPoI;
 	@Column
 	private String email;
 	@Column
@@ -34,12 +42,7 @@ public class PoIs {
 	private int localizacionLongitud;
 	@Column
 	private int media;
-	public Integer getCodigoPoI() {
-		return CodigoPoI;
-	}
-	public void setCodigoPoI(Integer codigoPoI) {
-		CodigoPoI = codigoPoI;
-	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -112,11 +115,12 @@ public class PoIs {
 	public void setMedia(int media) {
 		this.media = media;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((CodigoPoI == null) ? 0 : CodigoPoI.hashCode());
+		result = prime * result + ((codPoI == null) ? 0 : codPoI.hashCode());
 		result = prime * result + NumeroCasa;
 		result = prime * result + ((Sitio_web == null) ? 0 : Sitio_web.hashCode());
 		result = prime * result + ((barrio == null) ? 0 : barrio.hashCode());
@@ -131,6 +135,12 @@ public class PoIs {
 		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		return result;
 	}
+	public Integer getCodPoI() {
+		return codPoI;
+	}
+	public void setCodPoI(Integer codPoI) {
+		this.codPoI = codPoI;
+	}
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -140,10 +150,10 @@ public class PoIs {
 		if (getClass() != obj.getClass())
 			return false;
 		PoIs other = (PoIs) obj;
-		if (CodigoPoI == null) {
-			if (other.CodigoPoI != null)
+		if (codPoI == null) {
+			if (other.codPoI != null)
 				return false;
-		} else if (!CodigoPoI.equals(other.CodigoPoI))
+		} else if (!codPoI.equals(other.codPoI))
 			return false;
 		if (NumeroCasa != other.NumeroCasa)
 			return false;
@@ -197,12 +207,11 @@ public class PoIs {
 	}
 	@Override
 	public String toString() {
-		return "PoIs [CodigoPoI=" + CodigoPoI + ", email=" + email + ", nombre=" + nombre + ", descripcion="
-				+ descripcion + ", etiqueta=" + etiqueta + ", Sitio_web=" + Sitio_web + ", calle=" + calle
-				+ ", NumeroCasa=" + NumeroCasa + ", barrio=" + barrio + ", localidad=" + localidad
-				+ ", localizacionLatitud=" + localizacionLatitud + ", localizacionLongitud=" + localizacionLongitud
-				+ ", media=" + media + "]";
+		return "PoIs [codPoI=" + codPoI + ", email=" + email + ", nombre=" + nombre + ", descripcion=" + descripcion
+				+ ", etiqueta=" + etiqueta + ", Sitio_web=" + Sitio_web + ", calle=" + calle + ", NumeroCasa="
+				+ NumeroCasa + ", barrio=" + barrio + ", localidad=" + localidad + ", localizacionLatitud="
+				+ localizacionLatitud + ", localizacionLongitud=" + localizacionLongitud + ", media=" + media + "]";
 	}
-
-
-}
+	
+	}
+	
