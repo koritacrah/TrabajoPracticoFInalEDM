@@ -8,7 +8,7 @@
 .body-reg{
   font-family: "Open Sans", sans-serif;
   height: 100vh;
-  background: url(https://unjuradio.com/wp-content/uploads/2021/03/Jujuy-Turismo.jpg) 50% fixed;
+  background: url(https://laderasur.com/content/uploads/2018/07/Argentina.jpg) 50% fixed;
   background-size: cover;
 }
 
@@ -24,7 +24,7 @@
     max-width: 38em;
   padding: 1em 3em 2em 3em;
   margin: 0em auto;
-  box-shadow: 5px 3px 10px 15px rgba(0,0,0,0.2);
+  box-shadow: 2px 3px 10px 30px rgba(0,0,0,0.2);
 }
 
 .login-box h1 {
@@ -214,7 +214,7 @@
   text-decoration: none;
   font-size: 12px;
   line-height: 20px;
-  color: darkgrey;
+  color: black;
 }
 
 .reg-box a:hover {
