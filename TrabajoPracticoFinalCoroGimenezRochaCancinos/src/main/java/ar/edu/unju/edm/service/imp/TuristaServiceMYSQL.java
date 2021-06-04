@@ -1,5 +1,7 @@
 package ar.edu.unju.edm.service.imp;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -28,14 +30,14 @@ public class TuristaServiceMYSQL implements ITuristaService {
 		return unTurista;
 	}
 	@Override
-	public Turista encontrarUnTurista(int idTurista) throws Exception {
+	public Turista encontrarUnTurista(Integer idTurista) throws Exception {
 		// TODO Auto-generated method stub
-	    return iTuristaDAO.findByidTurista(idTurista).orElseThrow(()->new Exception("El turista NO existe"));
+	    return iTuristaDAO.findByIdTurista(idTurista).orElseThrow(()->new Exception("El turista NO existe"));
 	}
 	@Override
 	public void modificarTurista(Turista turistaModificado) throws Exception {
 		// TODO Auto-generated method stub
-		Turista turistaAModificar = iTuristaDAO.findByidTurista(turistaModificado.getIdTurista()).orElseThrow(()->new Exception("El Turista no fue encontrado"));
+		Turista turistaAModificar = iTuristaDAO.findByIdTurista(turistaModificado.getIdTurista()).orElseThrow(()->new Exception("El Turista no fue encontrado"));
 		cambiarTurista(turistaModificado, turistaAModificar);
 		iTuristaDAO.save(turistaAModificar);
 	}
@@ -45,12 +47,25 @@ public class TuristaServiceMYSQL implements ITuristaService {
 		turistaAModificar.setApellido(turistaModificado.getApellido());
 		turistaAModificar.setEmail(turistaModificado.getEmail());
 		turistaAModificar.setPaís(turistaModificado.getPaís());
+		turistaAModificar.setLocalizacionLatitud(turistaModificado.getLocalizacionLatitud());
+		turistaAModificar.setLocalizacionLongitud(turistaModificado.getLocalizacionLongitud());
+		turistaAModificar.setPassword(turistaModificado.getPassword());
 	}
 	@Override
-	public void eliminarTurista(int idTurista) throws Exception {
+	public void eliminarTurista(Integer idTurista) throws Exception {
 		// TODO Auto-generated method stub
-		Turista turistaEliminar = iTuristaDAO.findByidTurista(idTurista).orElseThrow(()->new Exception("El Turista no fue encontrado"));
+		Turista turistaEliminar = iTuristaDAO.findByIdTurista(idTurista).orElseThrow(()->new Exception("El Turista no fue encontrado"));
 		iTuristaDAO.delete(turistaEliminar);
+	}
+	@Override
+	public Turista encontrarUnTuristaPorEmail(String email) throws Exception {
+		// TODO Auto-generated method stub
+		return iTuristaDAO.findByEmail(email).orElseThrow(()->new Exception("El Turista no fue encontrado"));
+	}
+	@Override
+	public List<Turista> obtenerTodosTurista() {
+		// TODO Auto-generated method stub
+		return (List<Turista>) iTuristaDAO.findAll();
 	}
 	
 }

@@ -17,24 +17,22 @@
 			<h1>Registrarse</h1>
 			<form id="formTurista" th:object="${unTurista}"
 				th:action="${editMode}?@{/turista/modificar}:@{/turista/guardar}" method="post">
-
+				
+				<input class="form-control" type=hidden th:field="*{idTurista}" th:if="${editMode}">
+						
+			
 				<div class="form-group row">
 					<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
-					<div class=" col-sm-10">
 						<input type="text" id="nombre" th:field="*{nombre}" class="form-control">
-					</div>
 				</div>
 
 				<div class="form-group row">
 					<label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
-					<div class=" col-sm-10">
 						<input type="text" id="apellido" th:field="*{apellido}" class="form-control">
-					</div>
 				</div>
 
 				<div class="form-group row">
 					<label for="país" class="col-sm-2 col-form-label">País</label>
-					<div class=" col-sm-10">
 						<select id="país" th:field="*{país}" class="form-control">
 							<option value="Afganistán">Afganistán</option>
 							<option value="Akrotiri">Akrotiri</option>
@@ -100,45 +98,38 @@
 							<option value="Vietnam"> Vietnam</option>
 							<option value="Yemen"> Yemen</option>
 						</select>
-
-					</div>
 				</div>
 
 
 				<div class="form-group row">
 					<label for="latitud" class="col-sm-2 col-form-label">Latitud</label>
-					<div class=" col-sm-10">
 						<input type="number" th:field="*{localizacionLatitud}" class="form-control" id="latitud">
-					</div>
 				</div>
 
 				<div class="form-group row">
 					<label for="longitud" class="col-sm-2 col-form-label">Longitud</label>
-					<div class=" col-sm-10">
 						<input type="number" th:field="*{localizacionLongitud}" class="form-control" id="longitud">
-					</div>
 				</div>
 
 				
 
 				<div class="form-group row">
 					<label for="email" class="col-sm-2 col-form-label">Email</label>
-					<div class=" col-sm-10">
 						<input type="email" id="email" th:field="*{email}" class="form-control">
-					</div>
 				</div>
 
 				<div class="form-group row">
-					<label for="password" class="col-sm-2 col-form-label">Contraseña</label>
-					<div class=" col-sm-10">
+					<label for="password" class="col-sm-2 col-form-label" float = "left" >Contraseña</label>
 						<input type="password" id="password" th:field="*{password}" class="form-control">
-					</div>
 				</div>
 
 				<input type="submit" class="btn btn-success btn-block"
 					th:value="${editMode}?'Modificar Turista':'Registrarse'">
 
 				<a href="#" th:href="@{/login}">Ya tenes una cuenta?</a>
+				<br>
+				<br>
+		</form>
 				<!-- ---------------------------------------------------------------- -->
 
 
