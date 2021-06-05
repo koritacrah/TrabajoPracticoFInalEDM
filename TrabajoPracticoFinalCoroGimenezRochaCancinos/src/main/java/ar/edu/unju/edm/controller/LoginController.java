@@ -19,7 +19,6 @@ public class LoginController {
 		model.addAttribute("login", login);
 		return "login";
 	}
-
 }
 
 

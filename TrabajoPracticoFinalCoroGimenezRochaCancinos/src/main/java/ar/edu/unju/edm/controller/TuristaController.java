@@ -93,6 +93,6 @@ public class TuristaController {
 		catch(Exception e){
 			model.addAttribute("listErrorMessage",e.getMessage());
 		}			
-		return "redirect:/turista/perfiles";
+		return "redirect:/login";
 	}
 }

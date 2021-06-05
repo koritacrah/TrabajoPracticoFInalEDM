@@ -62,7 +62,7 @@
   border: none;
   outline: none;
   height: 40px;
-  background: #2E86C1;
+  background: #3498DB;
   color: #000;
   font-size: 18px;
   border-radius: 20px;
@@ -70,7 +70,7 @@
 
 .login-box input[type="submit"]:hover {
   cursor: pointer;
-  background: #AED6F1 ;
+  background: #A9DFBF ;
   color: #000;
 }
 
@@ -189,7 +189,7 @@
   border: none;
   outline: none;
   height: 40px;
-  background: #b80f22;
+  background:#3498DB;
   color: #000;
   font-size: 18px;
   border-radius: 20px;
@@ -197,7 +197,7 @@
 
 .reg-box input[type="submit"]:hover {
   cursor: pointer;
-  background: #ffc107;
+  background: #A9DFBF;
   color: #000;
 }
 
@@ -225,3 +225,7 @@
 .input2{width:100%;padding:10px;box-sizing:border-box;background:none;outline:none;resize:none;border:0;font-family:'Montserrat',sans-serif;transition:all .3s;border-bottom:2px solid #bebed2}
 .input2:focus{border-bottom:2px solid #78788c}
 .p2{content:attr(type);display:block;margin:28px 0 0;font-size:14px;color:#5a5a5a}
+
+.navbar{
+	background:#3498DB;
+}
