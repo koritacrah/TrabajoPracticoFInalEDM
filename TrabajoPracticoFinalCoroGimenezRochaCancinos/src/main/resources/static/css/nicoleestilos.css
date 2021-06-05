@@ -1,14 +1,14 @@
 .body-home{
   font-family: "Open Sans", sans-serif;
   height: 100vh;
-  background: url(https://cdn2.civitatis.com/argentina/san-salvador-de-jujuy/san-salvador-de-jujuy.jpg) 50% fixed;
+  background: url(https://laderasur.com/content/uploads/2018/07/Argentina.jpg) 50% fixed;
   background-size: cover;
 }
 
 .body-reg{
   font-family: "Open Sans", sans-serif;
   height: 100vh;
-  background: url(https://unjuradio.com/wp-content/uploads/2021/03/Jujuy-Turismo.jpg) 50% fixed;
+  background:white;
   background-size: cover;
 }
 
@@ -24,7 +24,7 @@
     max-width: 38em;
   padding: 1em 3em 2em 3em;
   margin: 0em auto;
-  box-shadow: 5px 3px 10px 15px rgba(0,0,0,0.2);
+  box-shadow: 2px 3px 10px 15px rgba(0,0,0,0.2);
 }
 
 .login-box h1 {
@@ -45,6 +45,7 @@
 .login-box input {
   width: 100%;
   margin-bottom: 20px;
+  color:white;
 }
 
 .login-box input[type="text"], .login-box input[type="password"], .login-box input[type="email"]{
@@ -61,7 +62,7 @@
   border: none;
   outline: none;
   height: 40px;
-  background: #b80f22;
+  background: #3498DB;
   color: #000;
   font-size: 18px;
   border-radius: 20px;
@@ -69,7 +70,7 @@
 
 .login-box input[type="submit"]:hover {
   cursor: pointer;
-  background: #ffc107;
+  background: #A9DFBF ;
   color: #000;
 }
 
@@ -188,7 +189,7 @@
   border: none;
   outline: none;
   height: 40px;
-  background: #b80f22;
+  background:#3498DB;
   color: #000;
   font-size: 18px;
   border-radius: 20px;
@@ -196,7 +197,7 @@
 
 .reg-box input[type="submit"]:hover {
   cursor: pointer;
-  background: #ffc107;
+  background: #A9DFBF;
   color: #000;
 }
 
@@ -214,9 +215,17 @@
   text-decoration: none;
   font-size: 12px;
   line-height: 20px;
-  color: darkgrey;
+  color: black;
 }
 
 .reg-box a:hover {
   color: #000;
+}
+
+.input2{width:100%;padding:10px;box-sizing:border-box;background:none;outline:none;resize:none;border:0;font-family:'Montserrat',sans-serif;transition:all .3s;border-bottom:2px solid #bebed2}
+.input2:focus{border-bottom:2px solid #78788c}
+.p2{content:attr(type);display:block;margin:28px 0 0;font-size:14px;color:#5a5a5a}
+
+.navbar{
+	background:#3498DB;
 }
