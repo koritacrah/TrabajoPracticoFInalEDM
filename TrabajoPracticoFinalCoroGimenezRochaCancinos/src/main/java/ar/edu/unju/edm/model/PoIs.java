@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -27,11 +28,11 @@ public class PoIs {
 	@Column
 	private String etiqueta;
 	@Column
-	private String Sitio_web;
+	private String sitio_web;
 	@Column
 	private String calle;
 	@Column
-	private int NumeroCasa;
+	private int numeroCasa;
 	@Column
 	private String barrio;
 	@Column
@@ -42,7 +43,17 @@ public class PoIs {
 	private int localizacionLongitud;
 	@Column
 	private int media;
-
+	@Lob
+	@Column(name = "prod_imagen", columnDefinition = "LONGBLOB")
+	private String imagen;
+	
+	
+	public Integer getCodPoI() {
+		return codPoI;
+	}
+	public void setCodPoI(Integer codPoI) {
+		this.codPoI = codPoI;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -68,10 +79,10 @@ public class PoIs {
 		this.etiqueta = etiqueta;
 	}
 	public String getSitio_web() {
-		return Sitio_web;
+		return sitio_web;
 	}
 	public void setSitio_web(String sitio_web) {
-		Sitio_web = sitio_web;
+		this.sitio_web = sitio_web;
 	}
 	public String getCalle() {
 		return calle;
@@ -80,10 +91,10 @@ public class PoIs {
 		this.calle = calle;
 	}
 	public int getNumeroCasa() {
-		return NumeroCasa;
+		return numeroCasa;
 	}
 	public void setNumeroCasa(int numeroCasa) {
-		NumeroCasa = numeroCasa;
+		this.numeroCasa = numeroCasa;
 	}
 	public String getBarrio() {
 		return barrio;
@@ -115,31 +126,31 @@ public class PoIs {
 	public void setMedia(int media) {
 		this.media = media;
 	}
-
+	public String getImagen() {
+		return imagen;
+	}
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((codPoI == null) ? 0 : codPoI.hashCode());
-		result = prime * result + NumeroCasa;
-		result = prime * result + ((Sitio_web == null) ? 0 : Sitio_web.hashCode());
 		result = prime * result + ((barrio == null) ? 0 : barrio.hashCode());
 		result = prime * result + ((calle == null) ? 0 : calle.hashCode());
+		result = prime * result + ((codPoI == null) ? 0 : codPoI.hashCode());
 		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((etiqueta == null) ? 0 : etiqueta.hashCode());
+		result = prime * result + ((imagen == null) ? 0 : imagen.hashCode());
 		result = prime * result + ((localidad == null) ? 0 : localidad.hashCode());
 		result = prime * result + localizacionLatitud;
 		result = prime * result + localizacionLongitud;
 		result = prime * result + media;
 		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + numeroCasa;
+		result = prime * result + ((sitio_web == null) ? 0 : sitio_web.hashCode());
 		return result;
-	}
-	public Integer getCodPoI() {
-		return codPoI;
-	}
-	public void setCodPoI(Integer codPoI) {
-		this.codPoI = codPoI;
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -150,18 +161,6 @@ public class PoIs {
 		if (getClass() != obj.getClass())
 			return false;
 		PoIs other = (PoIs) obj;
-		if (codPoI == null) {
-			if (other.codPoI != null)
-				return false;
-		} else if (!codPoI.equals(other.codPoI))
-			return false;
-		if (NumeroCasa != other.NumeroCasa)
-			return false;
-		if (Sitio_web == null) {
-			if (other.Sitio_web != null)
-				return false;
-		} else if (!Sitio_web.equals(other.Sitio_web))
-			return false;
 		if (barrio == null) {
 			if (other.barrio != null)
 				return false;
@@ -171,6 +170,11 @@ public class PoIs {
 			if (other.calle != null)
 				return false;
 		} else if (!calle.equals(other.calle))
+			return false;
+		if (codPoI == null) {
+			if (other.codPoI != null)
+				return false;
+		} else if (!codPoI.equals(other.codPoI))
 			return false;
 		if (descripcion == null) {
 			if (other.descripcion != null)
@@ -186,6 +190,11 @@ public class PoIs {
 			if (other.etiqueta != null)
 				return false;
 		} else if (!etiqueta.equals(other.etiqueta))
+			return false;
+		if (imagen == null) {
+			if (other.imagen != null)
+				return false;
+		} else if (!imagen.equals(other.imagen))
 			return false;
 		if (localidad == null) {
 			if (other.localidad != null)
@@ -203,15 +212,26 @@ public class PoIs {
 				return false;
 		} else if (!nombre.equals(other.nombre))
 			return false;
+		if (numeroCasa != other.numeroCasa)
+			return false;
+		if (sitio_web == null) {
+			if (other.sitio_web != null)
+				return false;
+		} else if (!sitio_web.equals(other.sitio_web))
+			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
 		return "PoIs [codPoI=" + codPoI + ", email=" + email + ", nombre=" + nombre + ", descripcion=" + descripcion
-				+ ", etiqueta=" + etiqueta + ", Sitio_web=" + Sitio_web + ", calle=" + calle + ", NumeroCasa="
-				+ NumeroCasa + ", barrio=" + barrio + ", localidad=" + localidad + ", localizacionLatitud="
-				+ localizacionLatitud + ", localizacionLongitud=" + localizacionLongitud + ", media=" + media + "]";
+				+ ", etiqueta=" + etiqueta + ", sitio_web=" + sitio_web + ", calle=" + calle + ", numeroCasa="
+				+ numeroCasa + ", barrio=" + barrio + ", localidad=" + localidad + ", localizacionLatitud="
+				+ localizacionLatitud + ", localizacionLongitud=" + localizacionLongitud + ", media=" + media
+				+ ", imagen=" + imagen + "]";
 	}
+	
+	
+
 	
 	}
 	
