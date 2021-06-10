@@ -47,8 +47,14 @@ public class TuristaController {
 		}
 	}
 	
+	@GetMapping("/turista/perfiles")
+	public String cargarPerfilTuristas(Model model){
+		model.addAttribute("turistas", turistaService.obtenerTodosTurista());
+		return("perfiles");
+	}
+	
 	@GetMapping("/turista/editar/{idTurista}")
-	public String editarCliente(Model model, @PathVariable(name="id") int idTurista) throws Exception {
+	public String editarTurista(Model model, @PathVariable(name="idTurista") Integer idTurista) throws Exception {
 		try {
 			Turista turistaEncontrado = turistaService.encontrarUnTurista(idTurista);
 			model.addAttribute("unTurista", turistaEncontrado);	
@@ -59,12 +65,13 @@ public class TuristaController {
 			model.addAttribute("unCliente", turistaService.crearTurista());
 			model.addAttribute("editMode", "false");
 		}
-		return("turista");
+		return("modificar");
 	}
 	
 	@PostMapping("/turista/modificar")
 	public String modificarTurista(@ModelAttribute("unTurista") Turista turistaModificado, Model model) {
 		try {
+			System.out.println("turista modificad:"+turistaModificado.getIdTurista());
 			turistaService.modificarTurista(turistaModificado);
 			model.addAttribute("unTurista", new Turista());				
 			model.addAttribute("editMode", "false");
@@ -74,18 +81,18 @@ public class TuristaController {
 			model.addAttribute("unTurista", turistaModificado);
 			model.addAttribute("editMode", "true");
 		}
-		return("turista");
+		return("redirect:/turista/perfiles");
 	}
 
 	@GetMapping("/turista/eliminarTurista/{idTurista}")
-	public String eliminarCliente(Model model, @PathVariable(name="id") int id) {
+	public String eliminarTurista(Model model, @PathVariable(name="idTurista") Integer idTurista) {
 		LOGGER.info("METHOD: ingresando el metodo Eliminar");
 		try {
-			turistaService.eliminarTurista(id);		
+			turistaService.eliminarTurista(idTurista);		
 		}
 		catch(Exception e){
 			model.addAttribute("listErrorMessage",e.getMessage());
 		}			
-		return "redirect:/turista/mostrar";
+		return "redirect:/login";
 	}
 }
