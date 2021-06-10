@@ -1,5 +1,7 @@
 package ar.edu.unju.edm.service.imp;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -61,6 +63,24 @@ public class PoIsServiceMYSQL implements IPoIsService{
 		PoIaModificar.setBarrio(PoIModificado.getBarrio());
 		PoIaModificar.setCalle(PoIModificado.getCalle());
 		PoIaModificar.setNumeroCasa(PoIModificado.getNumeroCasa());
+	}
+
+	@Override
+	public ArrayList<PoIs> obtenerTodosPoIs() {
+		// TODO Auto-generated method stub
+		return (ArrayList<PoIs>) IPoIsDAO.findAll();
+	}
+
+	@Override
+	public PoIs obtenerUnPoi(String nombrePoi) {
+		// TODO Auto-generated method stub
+		return Poi;
+	}
+
+	@Override
+	public PoIs obtenerPoiNuevo() {
+		// TODO Auto-generated method stub
+		return Poi;
 	}
 
 

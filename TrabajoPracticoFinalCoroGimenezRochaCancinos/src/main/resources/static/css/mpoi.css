@@ -1,0 +1,28 @@
+.icon{
+	width: 320;
+	height: 180;
+}
+.bodym{
+		background: #50809D;
+		text-align: center;
+
+}
+#carta{
+	background: #E1E3E9;
+	color: #8FAEC1;
+}
+.titulos{
+	color: #E1E3E9;
+}
+#button{
+	padding: 10px 24px;
+	font-size: 16px;
+		color: white;
+	background-color: #8FAEC1;
+		justify-content:left;
+		text-align: left;
+
+}
+#button:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}

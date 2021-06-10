@@ -2,14 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
+	<link th:rel="stylesheet" type="text/css" th:href="@{/css/poi.css}" />
 <link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
 	<link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.11.2/css/all.css} " />
-	<link th:rel="stylesheet" type="text/css" th:href="@{/css/poi.css}" />
+	
 </head>
 
-<body class="cargarbody">
-<h1 class="titulos">Agregar nuevo punto de interes al perfil</h1>
-<form id="formPoI" th:object="${poI}" th:action="@{/poi/guardar}"  method="post" enctype="multipart/form-data">
+<body class="bodycar">
+<h1 class="titulos" th:if="${!editMode}">Agregar Punto de Interes</h1>
+<h1 class="titulos" th:if="${editMode}">Modificar Punto de interes</h1>
+
+<form id="formPoI" th:object="${poi}" th:action="	${editMode}?@{/poi/modificar}:@{/poi/guardar}"  method="post" enctype="multipart/form-data">
+<input type="hidden" id="identificadorPoi" th:field="*{codPoI}" />
+
+
 <div class="form-group row">
 <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
 <input type="text" id="nom" th:field="*{nombre}" class="form-control col-sm-2">
@@ -54,9 +60,9 @@
 </div>
 
 <div class="accordion" id="accordionExample">
- <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="true" aria-controls="multiCollapseExample1">Ubicacion</a>
-<div class="collapse multi-collapse" id="multiCollapseExample1">
- <div class="form-group row">
+ <a class=" ub btn btn-primary " data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="true" aria-controls="multiCollapseExample1">Ubicacion</a>
+<div class="collapse multi-collapse acor" id="multiCollapseExample1">
+ <div class="form-group row acor">
  <label for="lat" class="col-sm-1 col-form-label">Latitud (Nº)</label>
 <input type="number" id="lat" th:field="*{localizacionLatitud}" class="form-control col-sm-2">
  <label for="long" class="col-sm-1 col-form-label">Longitud (Nº)</label>
@@ -118,7 +124,7 @@
 </div>
 </div>
 			<div>
-								<input type="submit" th:value="${editMode}?'Modificar Cliente':'Crear Cliente'">
+								<input type="submit" th:value="${editMode}?'Modificar Cliente':'Crear poi'">
 			</div>
 
 
