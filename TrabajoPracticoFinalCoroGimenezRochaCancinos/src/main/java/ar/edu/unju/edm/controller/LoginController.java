@@ -12,13 +12,21 @@ public class LoginController {
 	
 	@Autowired
 	Login login;
-    
-   @GetMapping({"/login"})
+	
+	@GetMapping({"/index"})
+	public String cargarIndex(){
+
+		return "index";
+	}
+	
+	
+	@GetMapping({"/login"})
 	public String cargarLogin(Model model) {
 				
 		model.addAttribute("login", login);
 		return "login";
 	}
+	
 }
 
 
