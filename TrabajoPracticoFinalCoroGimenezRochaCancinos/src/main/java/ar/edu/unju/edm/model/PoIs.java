@@ -8,7 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
+
 import org.springframework.stereotype.Component;
+
 
 @Entity
 @Table (name="PoIs")
@@ -24,6 +26,7 @@ public class PoIs {
 	@Column
 	private String nombre;
 	@Column
+	
 	private String descripcion;
 	@Column
 	private String etiqueta;
@@ -35,10 +38,13 @@ public class PoIs {
 	private int numeroCasa;
 	@Column
 	private String barrio;
+
 	@Column
 	private String localidad;
+	
 	@Column
 	private int localizacionLatitud;
+	
 	@Column
 	private int localizacionLongitud;
 	@Column
