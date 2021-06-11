@@ -1,12 +1,4 @@
 
-body{
-    background-color: white;
-    text-align: center;
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-bottom: 20px;
-    margin-right: 20px;
-}
 
 .s{
     width: 100%;
@@ -44,6 +36,14 @@ body{
 article h3{
     font-size: 200%;
     text-align: center;
+    
+}
+.pe{
+    text-align: left;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    margin-right: 20px;
     
 }
 article{
