@@ -6,6 +6,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -51,6 +53,13 @@ public class TuristaController {
 	public String cargarPerfilTuristas(Model model){
 		model.addAttribute("turistas", turistaService.obtenerTodosTurista());
 		return("perfiles");
+	}
+	
+	@GetMapping("/turista/perfil")
+	public String cargarPerfilTurista(Model model, Authentication authentication) throws Exception {
+		UserDetails userTurista = (UserDetails) authentication.getPrincipal();
+		model.addAttribute("unTurista", turistaService.encontrarUnTuristaPorEmail(userTurista.getUsername()));
+		return ("perfil");
 	}
 	
 	@GetMapping("/turista/editar/{idTurista}")

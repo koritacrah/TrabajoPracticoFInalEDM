@@ -13,10 +13,8 @@ public class LoginController {
 	@Autowired
 	Login login;
     
-   @GetMapping({"/login"})
+	@GetMapping({"/","/login","/home", "/index","/login?error=true"})
 	public String cargarLogin(Model model) {
-				
-		model.addAttribute("login", login);
 		return "login";
 	}
 }
