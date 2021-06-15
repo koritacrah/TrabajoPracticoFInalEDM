@@ -100,7 +100,7 @@ public class PoIsController {
 		}
 		return "redirect:/cargar/poi";
 	}
-	@GetMapping("poi/eliminar/{codPoI}")
+	@GetMapping("/poi/eliminar/{codPoI}")
 public String eliminarPoI(Model model, @PathVariable(name ="codPoI")int codPoI) {
 		try {
 			poiService.eliminarPoI(codPoI);

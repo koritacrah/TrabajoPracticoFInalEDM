@@ -52,7 +52,7 @@
 								<input type="hidden" id="identificadorUsuarioHiddenInput" name="userIdHiddenInput" />
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary" data-dismiss="modal">Volver</button>
-									<button type="button" class="btn btn-primary" th:onclick="eliminarUsuario()">Eliminar Poi</button>
+									<button type="button" class="btn btn-primary" th:onclick="eliminarpoi()">Eliminar Poi</button>
 								</div>
 							</div>
 						</div>
@@ -68,7 +68,7 @@
 
 	function eliminarpoi() {
 		var codPoI = $("#identificadorUsuarioHiddenInput").val();
-		window.location = "poi/eliminar/" + codPoI;
+		window.location = "/poi/eliminar/" + codPoI;
 	}
 </script>
 
