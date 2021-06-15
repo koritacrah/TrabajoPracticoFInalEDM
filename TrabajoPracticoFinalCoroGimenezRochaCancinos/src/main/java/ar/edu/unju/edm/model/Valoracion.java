@@ -1,5 +1,7 @@
 package ar.edu.unju.edm.model;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,11 +11,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
-@Entity  
-@Table (name="VALORARCION")
 @Component
+@Entity  
+@Table(name="Valoracion")
+
 public class Valoracion {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +31,15 @@ public class Valoracion {
 	@JoinColumn(name="idTurista")
 	private Turista turistaCreador;
 	@ManyToOne
-	@JoinColumn(name="codPoi")
+	@JoinColumn(name="codPoI")
 	private PoIs poiCreador;
+	@Column
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate fechaComentario;
 	
 	
+	
+
 	public Integer getIdValoracion() {
 		return idValoracion;
 	}
@@ -61,6 +70,14 @@ public class Valoracion {
 	public void setPoiCreador(PoIs poiCreador) {
 		this.poiCreador = poiCreador;
 	}
+	public LocalDate getFechaComentario() {
+		return fechaComentario;
+	}
+	public void setFechaComentario(LocalDate fechaComentario) {
+		this.fechaComentario = fechaComentario;
+	}
+	
+
 	
 	
 	
