@@ -14,7 +14,7 @@ public class LoginController {
 	Login login;
 
    
-	@GetMapping({"/","/login","/home", "/index","/login?error=true"})
+	@GetMapping({"/","/login", "/index","/login?error=true"})
 
 
 	public String cargarLogin(Model model) {

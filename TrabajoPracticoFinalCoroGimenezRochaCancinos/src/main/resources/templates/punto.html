@@ -45,8 +45,8 @@
 							role="button" aria-expanded="true" aria-controls="multiCollapseExample2">Dejar un
 							comentario</a>
 						<div class="collapse multi-collapse acor" id="multiCollapseExample2">
-						<form>
-							<!-- <form th:object="${unaValoracion}"  th:action="@{'/valoracion/guardar/'+*{p.codPoI}" method="post">-->
+			<form th:object="${unaValoracion}"  th:action="@{'/valoracion/guardar/'+*{poI.codigoPoI}}" method="post">
+					<!-- <form th:object="${unaValoracion}"  th:action="@{'/valoracion/guardar/'+*{p.codPoI}" method="post">-->
 								<div class="form-group row">
 									<label for="comentario" class="col-sm-2 col-form-label">Comentario</label>
 								<!--  <input type="text" id="comentario" th:field="*{comentario}" class="form-control"> -->
@@ -81,7 +81,7 @@
     								 <label for="radio5">★</label>-->
 									</p>
 								</div>
-								<input type="submit" id="button" value="Enviar Comentario y valoracion" />
+								<input type="submit" id="button" value="Enviar Comentario y valoracion" th:value="${editMode}?'Modificar Valoracion':'Agregar Valoracion'" />
 							</form>
 						</div>
 					</div>

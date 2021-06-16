@@ -70,7 +70,7 @@ public class PoIsController {
 					
 			poiService.guardarPoIs(nuevoPoI);
 			//trabajarConFechas();
-			return "redirect:/cargar/poi";
+			return "redirect:/mis/pois";
 		}
 	}
 
@@ -127,7 +127,7 @@ public String eliminarPoI(Model model, @PathVariable(name ="codPoI")int codPoI) 
 		}catch(Exception e){
 			model.addAttribute("listErrorMessage",e.getMessage());
 		}
-		return "redirect:/cargar/poi";
+		return "redirect:/mis/pois";
 	}
 	
 	
@@ -144,7 +144,12 @@ public String eliminarPoI(Model model, @PathVariable(name ="codPoI")int codPoI) 
 		return "home";
 	}
 	
-	
+	@GetMapping({"/punto"})
+	public String cargarpunto(Model model){
+		model.addAttribute("pois", poiService.obtenerTodosPoIs());
+
+		return "punto";
+	}
 	
 	
 }
