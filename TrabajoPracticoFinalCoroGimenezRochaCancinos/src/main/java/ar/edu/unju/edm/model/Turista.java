@@ -33,6 +33,8 @@ public class Turista {
 	private int localizacionLongitud;
 	@Column
 	private int puntos;
+	@Column
+	private String perfil;
 	
 	public Turista() {
 		// TODO Auto-generated constructor stub
@@ -108,6 +110,16 @@ public class Turista {
 
 	public void setPuntos(int puntos) {
 		this.puntos = puntos;
+	}
+	
+	
+
+	public String getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(String perfil) {
+		this.perfil = perfil;
 	}
 
 	@Override
