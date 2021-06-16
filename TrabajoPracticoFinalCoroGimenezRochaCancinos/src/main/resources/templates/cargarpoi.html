@@ -10,7 +10,9 @@
 </head>
 
 <body class="bodycar">
+
 <div th:insert="layouts/header :: header"></div>
+  
 	<h1 class="titulos" th:if="${!editMode}">Agregar Punto de Interes</h1>
 	<h1 class="titulos" th:if="${editMode}">Modificar Punto de interes</h1>
 

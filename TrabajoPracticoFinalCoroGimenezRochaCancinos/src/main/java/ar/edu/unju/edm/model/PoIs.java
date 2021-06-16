@@ -5,7 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -59,7 +61,9 @@ public class PoIs {
 	@Column(name = "prod_imagen2", columnDefinition = "LONGBLOB")
 	private String imagen2;
 	
-	
+	@ManyToOne
+	@JoinColumn(name = "idTurista")
+	private Turista turistaAutor;
 	
 	public String getImagen1() {
 		return imagen1;
@@ -156,6 +160,13 @@ public class PoIs {
 	}
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
+	}
+	
+	public Turista getTuristaAutor() {
+		return turistaAutor;
+	}
+	public void setTuristaAutor(Turista turistaAutor) {
+		this.turistaAutor = turistaAutor;
 	}
 	@Override
 	public int hashCode() {
