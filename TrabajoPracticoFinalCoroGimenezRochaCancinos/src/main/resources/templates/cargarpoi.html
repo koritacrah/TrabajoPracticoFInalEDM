@@ -48,14 +48,13 @@
 
 <div class="form-group row">
 <label for="etiqueta" class="col-sm-2 col-form-label">Etiquetas</label>
-<select multiple id="tipo" th:field="*{etiqueta}">
-						<option value="yungas ">Yungas</option>
-						<option value="Puna ">Puna</option>
-						<option value="Valle ">Valle</option>
-						<option value="Selva ">Selva</option>
-						<option value="Clima frio ">Clima Frio</option>
-						<option value="Clima calido ">Clima Calido</option>
-						<option value="mas de 2000 ">mas de 2000 mts de altura</option>
+<select id="tipo" th:field="*{etiqueta}">
+						<option value="cultura">cultura</option>
+						<option value="naturaleza ">naturaleza</option>
+						<option value="aventura ">aventura</option>
+						<option value="deportivo">deportivo</option>
+						<option value="gastronomía ">gastronomía</option>
+
 </select>
 </div>
 
@@ -126,10 +125,6 @@
 			<div>
 								<input type="submit" th:value="${editMode}?'Modificar Cliente':'Crear poi'">
 			</div>
-
-
-
-
 
 
 

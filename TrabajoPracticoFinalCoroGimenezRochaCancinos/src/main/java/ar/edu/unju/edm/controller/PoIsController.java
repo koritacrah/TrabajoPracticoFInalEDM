@@ -82,7 +82,7 @@ public class PoIsController {
 	}
 	
 	@PostMapping(value="/poi/modificar", consumes = "multipart/form-data")
-	public String modificarCliente(@RequestParam("file") MultipartFile file, @ModelAttribute("poi") PoIs poiModificado, Model model)  throws Exception{
+	public String modificarPoI(@RequestParam("file") MultipartFile file, @ModelAttribute("poi") PoIs poiModificado, Model model)  throws Exception{
 		
 		byte[] content = file.getBytes();
 		String base64 = Base64.getEncoder().encodeToString(content);
@@ -100,6 +100,17 @@ public class PoIsController {
 		}
 		return "redirect:/cargar/poi";
 	}
+	@GetMapping("poi/eliminar/{codPoI}")
+public String eliminarPoI(Model model, @PathVariable(name ="codPoI")int codPoI) {
+		try {
+			poiService.eliminarPoI(codPoI);
+			
+		}catch(Exception e){
+			model.addAttribute("listErrorMessage",e.getMessage());
+		}
+		return "redirect:/cargar/poi";
+	}
+	
 	
 	@GetMapping("/mis/pois")
 	public String cargarMisPoIs(Model model) {		
@@ -107,6 +118,14 @@ public class PoIsController {
 		model.addAttribute("pois", poiService.obtenerTodosPoIs());
 		return("mispoiss");
 	}
+	@GetMapping({"/home"})
+	public String cargarhome(Model model){
+		model.addAttribute("pois", poiService.obtenerTodosPoIs());
+
+		return "home";
+	}
+	
+	
 	
 	
 }
