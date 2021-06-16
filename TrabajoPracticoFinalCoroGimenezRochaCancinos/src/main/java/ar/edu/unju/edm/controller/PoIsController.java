@@ -43,10 +43,20 @@ public class PoIsController {
 		return ("cargarpoi");
 	}
 	@PostMapping(value="/poi/guardar", consumes = "multipart/form-data")
-	public String guardarNuevoPoI(@RequestParam("file") MultipartFile file, @ModelAttribute("poiGuardado") PoIs nuevoPoI, BindingResult resultado ,Model model)  throws IOException {
+	public String guardarNuevoPoI(@RequestParam("file") MultipartFile file, @RequestParam("file1") MultipartFile file1, @RequestParam("file2")  MultipartFile file2 , @ModelAttribute("poiGuardado") PoIs nuevoPoI, BindingResult resultado ,Model model)  throws IOException {
 		byte[] content = file.getBytes();
 		String base64 = Base64.getEncoder().encodeToString(content);
 		nuevoPoI.setImagen(base64);
+		
+		byte[] content1 = file1.getBytes();
+		String base65 = Base64.getEncoder().encodeToString(content1);
+		nuevoPoI.setImagen1(base65);
+		
+		byte[] content2 = file2.getBytes();
+		String base66 = Base64.getEncoder().encodeToString(content2);
+		nuevoPoI.setImagen2(base66);
+		
+		
 		
 		if (resultado.hasErrors()) 
 		{
@@ -82,11 +92,20 @@ public class PoIsController {
 	}
 	
 	@PostMapping(value="/poi/modificar", consumes = "multipart/form-data")
-	public String modificarPoI(@RequestParam("file") MultipartFile file, @ModelAttribute("poi") PoIs poiModificado, Model model)  throws Exception{
+	public String modificarPoI(@RequestParam("file") MultipartFile file , @RequestParam("file1") MultipartFile file1, @RequestParam("file2")  MultipartFile file2 , @ModelAttribute("poi") PoIs poiModificado, Model model)  throws Exception{
 		
 		byte[] content = file.getBytes();
 		String base64 = Base64.getEncoder().encodeToString(content);
 		poiModificado.setImagen(base64);
+		
+		byte[] content1 = file1.getBytes();
+		String base65 = Base64.getEncoder().encodeToString(content1);
+		poiModificado.setImagen1(base65);
+		
+		byte[] content2 = file2.getBytes();
+		String base66 = Base64.getEncoder().encodeToString(content2);
+		poiModificado.setImagen2(base66);
+		
 		
 		try {
 			poiService.modificarPoI(poiModificado);
