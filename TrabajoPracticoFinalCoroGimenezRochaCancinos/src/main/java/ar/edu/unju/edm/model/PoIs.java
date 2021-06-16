@@ -52,8 +52,27 @@ public class PoIs {
 	@Lob
 	@Column(name = "prod_imagen", columnDefinition = "LONGBLOB")
 	private String imagen;
+	@Lob
+	@Column(name = "prod_imagen1", columnDefinition = "LONGBLOB")
+	private String imagen1;
+	@Lob
+	@Column(name = "prod_imagen2", columnDefinition = "LONGBLOB")
+	private String imagen2;
 	
 	
+	
+	public String getImagen1() {
+		return imagen1;
+	}
+	public void setImagen1(String imagen1) {
+		this.imagen1 = imagen1;
+	}
+	public String getImagen2() {
+		return imagen2;
+	}
+	public void setImagen2(String imagen2) {
+		this.imagen2 = imagen2;
+	}
 	public Integer getCodPoI() {
 		return codPoI;
 	}
