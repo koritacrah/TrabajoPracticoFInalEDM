@@ -57,4 +57,18 @@ p.valoracion label:hover ~ label,
 p.valoracion input:checked ~ label {
   color: #dd4;
 }
-
+#ubi1{
+	justify-content:left;
+	text-align: left;
+	float:left;
+}
+#ubi2{
+	justify-content:left;
+	text-align: left;
+	float: right;
+}
+#ubi3{
+	justify-content:left;
+	text-align: left;
+	float: right;
+}
