@@ -63,6 +63,9 @@ public class PoIsServiceMYSQL implements IPoIsService{
 		PoIaModificar.setBarrio(PoIModificado.getBarrio());
 		PoIaModificar.setCalle(PoIModificado.getCalle());
 		PoIaModificar.setNumeroCasa(PoIModificado.getNumeroCasa());
+		PoIaModificar.setImagen(PoIModificado.getImagen());
+		PoIaModificar.setImagen1(PoIModificado.getImagen1());
+		PoIaModificar.setImagen2(PoIModificado.getImagen2());
 	}
 
 	@Override
