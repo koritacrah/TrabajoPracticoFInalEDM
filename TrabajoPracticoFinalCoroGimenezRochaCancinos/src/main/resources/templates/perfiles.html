@@ -14,6 +14,7 @@
 <body class="body">
 <div th:insert="layouts/header :: header"></div>
 	<div class="container">
+		
 		<h1>Turistas</h1>
 
 	
@@ -37,11 +38,8 @@
 					<td th:text="${t.apellido}"></td>
 					<td th:text="${t.email}"></td>
 					<td>
-		 				<a href="#" th:href="@{'/turista/editar/'+${t.idTurista}}">
-		 				
-							<i class="fa fa-edit"></i>
-						</a>
-						<a th:onclick="'javascript:confirmarEliminar(\''+${t.idTurista}+'\');'"><i class="fa fa-trash-alt"></i></a>
+		 				<a class="btn btn-info" href="#" th:href="@{'/turista/editar/'+${t.idTurista}}">Editar</a>
+						<a class="btn btn-info" th:onclick="'javascript:confirmarEliminar(\''+${t.idTurista}+'\');'">Eliminar</a>
 						</td>
 					</tr>
 				</table>
@@ -60,7 +58,7 @@
 									</button>
 								</div>
 								<div class="modal-body">
-									<h6>¿Esta segro de eliminar este usuario?</h6>
+									<h6>¿Esta seguro que desea darse de baja de la app?</h6>
 								</div>
 								<input type="hidden" id="identificadorUsuarioHiddenInput" name="userIdHiddenInput" />
 								<div class="modal-footer">

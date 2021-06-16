@@ -12,18 +12,12 @@ public class LoginController {
 	
 	@Autowired
 	Login login;
-	
-	@GetMapping({"/index"})
-	public String cargarIndex(){
 
-		return "index";
-	}
-	
-	
-	@GetMapping({"/login"})
+   
+	@GetMapping({"/","/login","/home", "/index","/login?error=true"})
+
+
 	public String cargarLogin(Model model) {
-				
-		model.addAttribute("login", login);
 		return "login";
 	}
 	

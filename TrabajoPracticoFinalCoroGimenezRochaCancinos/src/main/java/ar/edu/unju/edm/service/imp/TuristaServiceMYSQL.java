@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.edm.model.Turista;
@@ -20,9 +21,15 @@ public class TuristaServiceMYSQL implements ITuristaService {
 	@Autowired
 	ITuristaDAO iTuristaDAO;
 	@Override
-	public void guardarTurista(Turista turistaGuardado) {
+	public void guardarTurista(Turista unTurista) {
 		// TODO Auto-generated method stub
-		iTuristaDAO.save(turistaGuardado);
+		//le asignamos un rol ya definido cuando se crea
+		unTurista.setPerfil("userNormal");
+		String pw = unTurista.getPassword();
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
+		unTurista.setPassword(bCryptPasswordEncoder.encode(pw));
+		
+		iTuristaDAO.save(unTurista);
 	}
 	@Override
 	public Turista crearTurista() {
