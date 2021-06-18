@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<link th:rel="stylesheet" type="text/css" th:href="@{/css/mpoi.css}" />
+	<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
+	<link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.11.2/css/all.css} " />
+
+</head>
+<body class="bodym">
+<div th:insert="layouts/header :: header" ></div>
+ <form th:each="p : ${pois}" th:object="${valoracion}" th:action="@{'/valoracion/guardar/'+*{p.codPoI}}" method="post">-->
+				 															
+								<div class="form-group row">
+								<label for="comentario" class="col-sm-2 col-form-label">Comentario</label>
+								
+								<input type="text" id="comentario" th:field="*{comentario}" class="form-control"> -->
+									<textarea type="text" id="comentario" cols="30" rows="1"
+										class="col-form-label"></textarea>
+								</div>
+								<div class="form-group row">
+
+									<label for="comentario" class="col-sm-3 col-form-label">Puntue este punto de
+										interes</label>
+									<p class="valoracion col-form-label">
+										<!-- 	   <input id="radio1" type="radio" name="estrellas" value="5" >
+ 									    <label for="radio1">★</label>
+  										<input id="radio2" type="radio" name="estrellas" value="4">
+    									<label for="radio2">★</label>
+    									<input id="radio3" type="radio" name="estrellas" value="3">
+    									<label for="radio3">★</label>
+    									<input id="radio4" type="radio" name="estrellas" value="2">
+    									<label for="radio4">★</label>
+    									<input id="radio5" type="radio" name="estrellas" value="1">
+    									<label for="radio5">★</label> -->
+    								
+    						<input id="radio1" type="radio" name="estrellas" value="5" th:field="*{valoracion}">
+   									 <label for="radio1">★</label>
+   									 <input id="radio2" type="radio" name="estrellas" value="4" th:field="*{valoracion}">
+   									 <label for="radio2">★</label>
+    								 <input id="radio3" type="radio" name="estrellas" value="3" th:field="*{valoracion}">
+    								 <label for="radio3">★</label>
+    								 <input id="radio4" type="radio" name="estrellas" value="2" th:field="*{valoracion}">
+    								 <label for="radio4">★</label>
+    								 <input id="radio5" type="radio" name="estrellas" value="1" th:field="*{valoracion}">
+    								 <label for="radio5">★</label>-->
+									</p>
+								</div>
+								<input type="submit"  id="button" value="Enviar Comentario y valoracion" />
+							</form>
+<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}" type="text/javascript"
+		src="webjars/jquery/3.5.1/jquery.min.js"></script>
+	<script th:src="@{/webjars/popper.js/1.16.0/popper.min.js}" type="text/javascript"
+		src="webjars/popper.js/1.16.0/popper.min.js"></script>
+	<script th:src="@{/webjars/bootstrap/4.5.0/js/bootstrap.min.js}" type="text/javascript"
+		src="webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>
