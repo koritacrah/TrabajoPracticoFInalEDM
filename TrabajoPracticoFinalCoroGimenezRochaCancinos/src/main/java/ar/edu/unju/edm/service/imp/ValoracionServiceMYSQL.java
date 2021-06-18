@@ -48,7 +48,7 @@ public class ValoracionServiceMYSQL implements IValoracionService {
 	}
 	private void cambiarValoracion (Valoracion desde, Valoracion hacia) {
 		hacia.setComentario(desde.getComentario());
-		hacia.setValoracion(desde.getValoracion());
+		hacia.setUnaValoracion(desde.getUnaValoracion());
 	}
 	
 	@Override

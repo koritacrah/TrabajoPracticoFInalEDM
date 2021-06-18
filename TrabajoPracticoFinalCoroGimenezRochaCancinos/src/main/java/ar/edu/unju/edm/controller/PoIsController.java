@@ -11,6 +11,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,19 +25,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import ar.edu.unju.edm.model.PoIs;
+import ar.edu.unju.edm.model.Turista;
 import ar.edu.unju.edm.service.IPoIsService;
+import ar.edu.unju.edm.service.ITuristaService;
+import ar.edu.unju.edm.service.IValoracionService;
 
 
 @Controller
 public class PoIsController {
 	private static final Log LOGGER = LogFactory.getLog(PoIsController.class);
-	
+	@Autowired
+	@Qualifier("implementacionMYSQLValoracion")
+	IValoracionService valoracionService;
 	@Autowired
 	@Qualifier("implementacionMYSQLPoI")
-	
 	IPoIsService poiService;
-	
-	
+	@Autowired
+	ITuristaService turistaService;
+	@Autowired
+	Turista unTurista;
 	@GetMapping("/cargar/poi")
 	public String crearPoI(Model model) {
 		LOGGER.info("METHOD: ingresando el metodo cargar");
@@ -43,7 +52,7 @@ public class PoIsController {
 		return ("cargarpoi");
 	}
 	@PostMapping(value="/poi/guardar", consumes = "multipart/form-data")
-	public String guardarNuevoPoI(@RequestParam("file") MultipartFile file, @RequestParam("file1") MultipartFile file1, @RequestParam("file2")  MultipartFile file2 , @ModelAttribute("poiGuardado") PoIs nuevoPoI, BindingResult resultado ,Model model)  throws IOException {
+	public String guardarNuevoPoI(@RequestParam("file") MultipartFile file, @RequestParam("file1") MultipartFile file1, @RequestParam("file2")  MultipartFile file2 , @ModelAttribute("poiGuardado") PoIs nuevoPoI, BindingResult resultado ,Model model,Authentication authentication)  throws IOException {
 		byte[] content = file.getBytes();
 		String base64 = Base64.getEncoder().encodeToString(content);
 		nuevoPoI.setImagen(base64);
@@ -65,10 +74,35 @@ public class PoIsController {
 		}
 		else 
 		{
-			//deberia tener un try por si ocurre algun error
+			//declarando el autentiqueishon
 			LOGGER.info("METHOD: ingresando el metodo Guardar");
+			Authentication auth = SecurityContextHolder
+		            .getContext()
+		            .getAuthentication();
+		    UserDetails userTurista = (UserDetails) auth.getPrincipal();
+		    try {
+				Turista turistaEncontrado = turistaService.encontrarUnTuristaPorEmail(userTurista.getUsername());
+				
+				if (turistaEncontrado != null) {
 					
-			poiService.guardarPoIs(nuevoPoI);
+					turistaEncontrado.setPuntos(turistaEncontrado.getPuntos() + 10);
+					System.out.println(turistaEncontrado.getPuntos());
+					
+					nuevoPoI.setTuristaAutor(turistaEncontrado);
+					poiService.guardarPoIs(nuevoPoI);
+					model.addAttribute("pois", poiService.obtenerTodosPoIs());
+				
+					
+				}
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    
+			/*Turista turistaEncontrado=turistaService.encontrarUnTurista(userTurista.getUsername());		
+			poiService.guardarPoIs(nuevoPoI);*/
+			
 			//trabajarConFechas();
 			return "redirect:/mis/pois";
 		}
@@ -133,8 +167,27 @@ public String eliminarPoI(Model model, @PathVariable(name ="codPoI")int codPoI) 
 	
 	@GetMapping("/mis/pois")
 	public String cargarMisPoIs(Model model) {		
-		model.addAttribute("Poi", poiService.obtenerPoiNuevo());
-		model.addAttribute("pois", poiService.obtenerTodosPoIs());
+
+		Authentication auth = SecurityContextHolder
+	            .getContext()
+	            .getAuthentication();
+	    UserDetails userTurista = (UserDetails) auth.getPrincipal();
+	    try {
+			Turista turistaEncontrado = turistaService.encontrarUnTuristaPorEmail(userTurista.getUsername());
+			
+			if (turistaEncontrado != null) {
+				
+				
+				model.addAttribute("Poi", poiService.obtenerPoiNuevo());
+				model.addAttribute("pois", poiService.obtenerMisPoIs(turistaEncontrado));
+			
+				
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return("mispoiss");
 	}
 	@GetMapping({"/home"})
@@ -147,7 +200,7 @@ public String eliminarPoI(Model model, @PathVariable(name ="codPoI")int codPoI) 
 	@GetMapping({"/punto"})
 	public String cargarpunto(Model model){
 		model.addAttribute("pois", poiService.obtenerTodosPoIs());
-
+		model.addAttribute("valoracion", valoracionService.crearUnaValoracion());
 		return "punto";
 	}
 	
