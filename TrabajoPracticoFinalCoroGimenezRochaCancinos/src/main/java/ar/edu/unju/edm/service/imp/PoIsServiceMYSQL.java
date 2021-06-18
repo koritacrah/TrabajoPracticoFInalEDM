@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.edm.model.PoIs;
+import ar.edu.unju.edm.model.Turista;
 import ar.edu.unju.edm.repository.IPoIsDAO;
+import ar.edu.unju.edm.repository.ITuristaDAO;
 import ar.edu.unju.edm.service.IPoIsService;
 
 @Service
@@ -18,6 +20,8 @@ public class PoIsServiceMYSQL implements IPoIsService{
 	PoIs Poi;
 @Autowired
  IPoIsDAO IPoIsDAO;
+@Autowired
+ITuristaDAO iTuristaDAO;
 	@Override
 	public void guardarPoIs(PoIs PoIGuardado) {
 		// TODO Auto-generated method stub
@@ -84,6 +88,13 @@ public class PoIsServiceMYSQL implements IPoIsService{
 	public PoIs obtenerPoiNuevo() {
 		// TODO Auto-generated method stub
 		return Poi;
+	}
+
+	@Override
+	public ArrayList<PoIs> obtenerMisPoIs(Turista turistaAutor) {
+		// TODO Auto-generated method stub
+		return (ArrayList<PoIs>) IPoIsDAO.findAllByTuristaAutor(turistaAutor);
+	
 	}
 
 

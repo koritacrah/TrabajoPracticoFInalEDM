@@ -1,6 +1,5 @@
 package ar.edu.unju.edm.model;
 
-import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.springframework.format.annotation.DateTimeFormat;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -24,7 +23,7 @@ public class Valoracion {
 	@Column
 	private Integer idValoracion;
 	@Column
-	private int valoracion;
+	private Integer unaValoracion;
 	@Column
 	private String comentario;
 	@ManyToOne
@@ -33,9 +32,7 @@ public class Valoracion {
 	@ManyToOne
 	@JoinColumn(name="codPoI")
 	private PoIs poiCreador;
-	@Column
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate fechaComentario;
+	
 	
 	
 	
@@ -46,11 +43,12 @@ public class Valoracion {
 	public void setIdValoracion(Integer idValoracion) {
 		this.idValoracion = idValoracion;
 	}
-	public int getValoracion() {
-		return valoracion;
+	
+	public Integer getUnaValoracion() {
+		return unaValoracion;
 	}
-	public void setValoracion(int valoracion) {
-		this.valoracion = valoracion;
+	public void setUnaValoracion(Integer unaValoracion) {
+		this.unaValoracion = unaValoracion;
 	}
 	public String getComentario() {
 		return comentario;
@@ -70,12 +68,7 @@ public class Valoracion {
 	public void setPoiCreador(PoIs poiCreador) {
 		this.poiCreador = poiCreador;
 	}
-	public LocalDate getFechaComentario() {
-		return fechaComentario;
-	}
-	public void setFechaComentario(LocalDate fechaComentario) {
-		this.fechaComentario = fechaComentario;
-	}
+
 	
 
 	

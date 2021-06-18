@@ -40,6 +40,7 @@ public class LoginTuristaServiceImp implements UserDetailsService{
 		
 		//usuario que va a estar en sesion
 		UserDetails user = (UserDetails) new User(email, turistaEncontrado.getPassword(), tipos);
+		System.out.println("tuvieja"+turistaEncontrado.getPassword());
 		return user;
 	}
 	

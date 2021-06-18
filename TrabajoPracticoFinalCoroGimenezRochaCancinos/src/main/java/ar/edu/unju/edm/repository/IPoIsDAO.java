@@ -18,4 +18,6 @@ public interface IPoIsDAO extends CrudRepository <PoIs, Integer>{
 	
 	public List<PoIs> obtenerPoIs();
 	public List<PoIs> findAllByTuristaAutor(Turista turistaAutor);
+	
+
 }
