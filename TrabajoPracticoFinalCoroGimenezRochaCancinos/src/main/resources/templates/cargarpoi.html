@@ -11,8 +11,8 @@
 
 <body class="body-home">
 
-<div th:insert="layouts/header :: header"></div>
-  
+<nav th:insert="layouts/header :: header"></nav>
+  <div class="poi-box">
 	<h1 class="titulos" th:if="${!editMode}">Agregar Punto de Interes</h1>
 	<h1 class="titulos" th:if="${editMode}">Modificar Punto de interes</h1>
 
@@ -169,7 +169,7 @@
 
 
 
-
+</div>
 
 
 

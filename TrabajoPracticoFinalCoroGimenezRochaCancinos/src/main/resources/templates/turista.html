@@ -12,13 +12,13 @@
 
 </head>
 
-<body class="body-home">
+<body class="body-index">
 <div th:insert="layouts/header2 :: header2"></div>
 	<div class="container">
 		<div class="reg-box">
 			<h1>Registrarse</h1>
 			<form id="formTurista" th:object="${unTurista}"
-				th:action="${editMode}?@{/turista/modificar}:@{/turista/guardar}" method="post">
+				th:action="${editMode}?@{/turista/modificar}:@{/turista/guardar}" method="post" class="formulario">
 				
 				<input class="form-control" type=hidden th:field="*{idTurista}" th:if="${editMode}">
 						

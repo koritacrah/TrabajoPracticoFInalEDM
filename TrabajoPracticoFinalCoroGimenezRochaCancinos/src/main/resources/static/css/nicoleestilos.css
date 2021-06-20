@@ -5,6 +5,12 @@
   background-size: cover;
 }
 
+.body-index{
+  font-family: "Open Sans", sans-serif;
+  height: 100vh;
+  background: url(https://saltamasiva.com/download/multimedia.normal.ad912f9cc6cc42a7.74757269736d6f206a756a75795f6e6f726d616c2e6a7067.jpg) 50% fixed;
+  background-size: cover;
+}
 .body-reg{
   font-family: "Open Sans", sans-serif;
   height: 100vh;
@@ -12,21 +18,23 @@
   background-size: cover;
 }
 
-
 .login-box {
-  height: 420px;
+  height: auto;
   top: 50%;
   left: 50%;
   position: absolute;
   transform: translate(-50%, -50%);
   box-sizing: border-box;
   padding: 70px 30px;
-    max-width: 38em;
+  max-width: 38em;
   padding: 1em 3em 2em 3em;
   margin: 0em auto;
-  box-shadow: 2px 3px 10px 15px rgba(0,0,0,0.2);
+  box-shadow: 2px 3px 10px 15px rgba(85,0,0,0.5);
+  background-color: rgba(248, 249, 249, 0.3);
 }
-
+.poi-box{
+text-align:center;
+}
 .login-box h1 {
   color: #000;
   margin: 0;
@@ -62,7 +70,7 @@
   border: none;
   outline: none;
   height: 40px;
-  background: #3498DB;
+  background:#6fc4ff;
   color: #000;
   font-size: 18px;
   border-radius: 20px;
@@ -140,11 +148,16 @@
       text-align: center;
 	  margin-right:5px;
 }
-
+.formulario{
+	margin-top:0%;
+	margin-bottom:0%;
+	
+}
 .reg-box {
-  height: 420px;
-  top: 50%;
+  height: auto;
+  top: 95%;
   left: 50%;
+  
   position: absolute;
   transform: translate(-50%, -50%);
   box-sizing: border-box;
@@ -152,9 +165,14 @@
     max-width: 38em;
   padding: 1em 3em 2em 3em;
   margin: 0em auto;
-  box-shadow: 0px 3px 10px px rgba(0,0,0,0.2);
+  box-shadow: 2px 3px 10px 15px rgba(85,0,0,0.5);
+  background-color: rgba(248, 249, 249, 0.3);
+  
 }
-
+.pe{
+	font:bold 19px sans-serif;
+	font-style: oblique;
+}
 .reg-box h1 {
   color: #000;
   margin: 0;
@@ -189,7 +207,7 @@
   border: none;
   outline: none;
   height: 40px;
-  background:#3498DB;
+  background:#2AF9E9;
   color: #000;
   font-size: 18px;
   border-radius: 20px;
