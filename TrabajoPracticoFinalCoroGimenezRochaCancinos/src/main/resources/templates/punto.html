@@ -8,10 +8,12 @@
 	th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
 <link th:rel="stylesheet"
 	th:href="@{/webjars/font-awesome/5.11.2/css/all.css} " />
+<link th:rel="stylesheet" type="text/css"
+	th:href="@{/css/nicoleestilos.css}" />
 
 </head>
 
-<body class="bodym">
+<body class="body-home">
 	<div th:insert="layouts/header :: header"></div>
 	<div class="form-group row" th:each="p : ${pois}">
 
@@ -47,48 +49,8 @@
 
 
 
-					<div class="accordion" id="accordionExample1">
-						<a class=" ub btn " id="button" data-toggle="collapse"
-							href="#multiCollapseExample2" role="button" aria-expanded="true"
-							aria-controls="multiCollapseExample2">Dejar un comentario</a>
-						<div class="collapse multi-collapse acor"
-							id="multiCollapseExample2">
-
-							<form th:object="${valoracion}" th:action="@{'/valoracion/guardar/'+${p.codPoI}}" method="post">
-							
-
-								<div class="form-group row">
-									<label for="comentario" class="col-sm-2 col-form-label">Comentario</label>
-
-									<input type="text" id="comentario" th:field="${valoracion.comentario}" >
-									<!-- <textarea type="text" id="comentario" cols="30" rows="1"
-										class="col-form-label"></textarea> -->
-								</div>
-								<div class="form-group row">
-
-									<label for="comentario" class="col-sm-3 col-form-label">Puntue
-										este punto de interes</label>
-									<p class="valoracion col-form-label">
-						
-
-									 <input id="radio1" type="radio" name="estrellas" value="5" th:field="${valoracion.unaValoracion}">
-   									 <label for="radio1">★</label>
-   									 <input id="radio2" type="radio" name="estrellas" value="4" th:field="${valoracion.unaValoracion}">
-   									 <label for="radio2">★</label>
-    								 <input id="radio3" type="radio" name="estrellas" value="3" th:field="${valoracion.unaValoracion}">
-    								 <label for="radio3">★</label>
-    								 <input id="radio4" type="radio" name="estrellas" value="2" th:field="${valoracion.unaValoracion}">
-    								 <label for="radio4">★</label>
-    								 <input id="radio5" type="radio" name="estrellas" value="1" th:field="${valoracion.unaValoracion}">
-    								 <label for="radio5">★</label>
-									</p>
-								</div>
-								<input type="submit" id="button"
-									value="Enviar Comentario y valoracion" />
-							</form>
-						</div>
-					</div>
-
+					<a id="button" th:href="@{'/cargar_valoracion/'+${p.codPoI}}">crear valoracion</a>
+					<a id="button" th:href="@{'/valoraciones/'+${p.codPoI}}">ver valoraciones</a>
 					<p class="card-text" id="etiqueta"
 						th:text=" 'Pertenece la seccion ' +${p.etiqueta}">
 						<small class="text-muted">etiqueta</small>

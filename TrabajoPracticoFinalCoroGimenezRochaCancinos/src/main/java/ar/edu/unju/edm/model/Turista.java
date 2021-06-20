@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.stereotype.Component;
 
@@ -18,12 +19,16 @@ public class Turista {
 	@Column
 	private Integer idTurista;
 	@Column
+	@NotBlank (message="Debe registrarse con un email valido, recuerde que no podrá cambiarlo luego.")
 	private String email;
 	@Column
+	@NotBlank (message="Debe registrar una contraseña para poder ingresar.")
 	private String password;
 	@Column
+	@NotBlank (message="Debe registrar su nombre.")
 	private String nombre;
 	@Column
+	@NotBlank (message="Debe registrar su apellido.")
 	private String apellido;
 	@Column
 	private String país;

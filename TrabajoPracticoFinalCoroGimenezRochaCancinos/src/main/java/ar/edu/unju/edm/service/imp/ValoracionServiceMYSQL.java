@@ -1,12 +1,15 @@
 
 package ar.edu.unju.edm.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import ar.edu.unju.edm.model.PoIs;
+import ar.edu.unju.edm.model.Turista;
 import ar.edu.unju.edm.model.Valoracion;
 import ar.edu.unju.edm.repository.IValoracionDAO;
 import ar.edu.unju.edm.service.IValoracionService;
@@ -31,7 +34,7 @@ public class ValoracionServiceMYSQL implements IValoracionService {
 	}
 
 	@Override
-	public void eliminarValoracion(int idValoracion) throws Exception {
+	public void eliminarValoracion(Integer idValoracion) throws Exception {
 		// TODO Auto-generated method stub
 		//Valoracion valoracionEliminar=valoracionDAO.findByIdValoracion(idValoracion).orElseThrow(()->new Exception("Valoracion no encontrada"));
 		Valoracion valoracionEliminar = valoracionDAO.findById(idValoracion).orElseThrow(()->new Exception("Valoracion no encontrada"));
@@ -42,10 +45,11 @@ public class ValoracionServiceMYSQL implements IValoracionService {
 	public void modificarValoracion(Valoracion valModificado) throws Exception {
 		// TODO Auto-generated method stub
 		//Valoracion valoracionModi=valoracionDAO.findByIdValoracion(valModificado.getIdValoracion()).orElseThrow(()->new Exception("Turista no encontrado"));
-		Valoracion valoracionModi=valoracionDAO.findById(valModificado.getIdValoracion()).orElseThrow(()->new Exception("Turista no encontrado"));
+		Valoracion valoracionModi=valoracionDAO.findByidValoracion(valModificado.getIdValoracion()).orElseThrow(()->new Exception("Turista no encontrado"));
 	    cambiarValoracion(valModificado, valoracionModi);
 	    valoracionDAO.save(valoracionModi);
 	}
+	
 	private void cambiarValoracion (Valoracion desde, Valoracion hacia) {
 		hacia.setComentario(desde.getComentario());
 		hacia.setUnaValoracion(desde.getUnaValoracion());
@@ -63,6 +67,21 @@ public class ValoracionServiceMYSQL implements IValoracionService {
 		return valoracionDAO.findById(idValoracion).orElseThrow(()-> new Exception ("esta valoracion no existe"));
 		//return valoracionDAO.findByIdValoracion(idValoracion).orElseThrow(()-> new Exception ("esta valoracion no existe"));
 	}
+
+
+	@Override
+	public ArrayList<Valoracion> obtenerMisValoraciones(PoIs codPoI) {
+		// TODO Auto-generated method stub
+		return (ArrayList<Valoracion>) valoracionDAO.findAllByPoiCreador(codPoI);
+	}
+
+	@Override
+	public ArrayList<Valoracion> obtenerMioValoraciones(Turista turistaCreador) {
+		// TODO Auto-generated method stub
+		return (ArrayList<Valoracion>) valoracionDAO.findAllByTuristaCreador(turistaCreador);
+	}
+
+	
 
 
 

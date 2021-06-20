@@ -19,7 +19,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	private AutenticationSuccessHandler autenticacion;
 
 	String[] resources = new String[] {
-			"/include/**","/css/**","/img/**","/js/**","/layer/**","/webjars/**"
+			"/include/**","/css/**","/img/**","/js/**","/layer/**","/webjars/**",
 	};
 
 	@Override
@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 				.and().formLogin()				
 				.loginPage("/login").permitAll()
 				.successHandler(autenticacion)
-				//.defaultSuccessUrl("/turista/perfiles")
+				//.defaultSuccessUrl("/home")
 				.failureUrl("/login?error=true")
 				.usernameParameter("correo")
 				.passwordParameter("password")

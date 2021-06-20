@@ -2,6 +2,7 @@ package ar.edu.unju.edm.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -65,6 +66,8 @@ public class PoIs {
 	@JoinColumn(name = "idTurista")
 	private Turista turistaAutor;
 	
+	
+
 	public String getImagen1() {
 		return imagen1;
 	}
