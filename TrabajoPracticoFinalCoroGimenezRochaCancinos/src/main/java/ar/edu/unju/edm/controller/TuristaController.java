@@ -45,7 +45,7 @@ public class TuristaController {
 		{
 			LOGGER.info("METHOD: ingresando el metodo Guardar");
 			turistaService.guardarTurista(nuevoTurista);
-			return "redirect:/turista/mostrar";
+			return "redirect:/index";
 		}
 	}
 	
@@ -90,7 +90,7 @@ public class TuristaController {
 			model.addAttribute("unTurista", turistaModificado);
 			model.addAttribute("editMode", "true");
 		}
-		return("redirect:/turista/perfiles");
+		return("redirect:/turista/perfil");
 	}
 
 	@GetMapping("/turista/eliminarTurista/{idTurista}")

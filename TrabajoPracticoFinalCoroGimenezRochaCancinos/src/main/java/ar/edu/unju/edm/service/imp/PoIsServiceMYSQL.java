@@ -35,7 +35,7 @@ ITuristaDAO iTuristaDAO;
 	}
 
 	@Override
-	public PoIs encontrarUnPoi(int codPoI) throws Exception {
+	public PoIs encontrarUnPoi(Integer codPoI) throws Exception {
 		// TODO Auto-generated method stub
 		return IPoIsDAO.findBycodPoI(codPoI).orElseThrow(()->new Exception("El punto de interes NO existe"));
 	}
@@ -48,7 +48,7 @@ ITuristaDAO iTuristaDAO;
 		IPoIsDAO.save(PoIaModificar);
 	}
 	@Override
-	public void eliminarPoI(int codPoI) throws Exception {
+	public void eliminarPoI(Integer codPoI) throws Exception {
 		// TODO Auto-generated method stub
 		PoIs PoIaEliminar =IPoIsDAO.findBycodPoI(codPoI).orElseThrow(()->new Exception("El punto de interes no fue encontrado"));
 		IPoIsDAO.delete(PoIaEliminar);

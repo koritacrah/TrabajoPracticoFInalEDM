@@ -74,6 +74,7 @@ public class TuristaServiceMYSQL implements ITuristaService {
 		// TODO Auto-generated method stub
 		return (List<Turista>) iTuristaDAO.findAll();
 	}
+	
 
 	
 }

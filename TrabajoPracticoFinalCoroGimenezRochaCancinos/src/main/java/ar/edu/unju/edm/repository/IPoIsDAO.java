@@ -13,7 +13,7 @@ import ar.edu.unju.edm.model.Turista;
 @Repository
 public interface IPoIsDAO extends CrudRepository <PoIs, Integer>{
 
-	public Optional<PoIs> findBycodPoI(int CodPoI);
+	public Optional<PoIs> findBycodPoI(Integer CodPoI);
 	@Query("from PoIs p order by p.codPoI")
 	
 	public List<PoIs> obtenerPoIs();

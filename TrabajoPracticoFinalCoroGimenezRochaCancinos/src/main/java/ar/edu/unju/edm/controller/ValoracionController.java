@@ -1,5 +1,8 @@
 package ar.edu.unju.edm.controller;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
@@ -53,7 +56,6 @@ public class ValoracionController {
 	
 	@PostMapping("/valoracion/guardar/{codPoI}")
 	public String guardarNuevoValoracion( @ModelAttribute("unaValoracion") Valoracion nuevaValoracion,@PathVariable(name="codPoI") Integer codigo, Model model) {		
-		System.out.println("entro1");
 		//System.out.println(valoracionService.obtenerTodasValoraciones());
 		model.addAttribute("valoraciones", valoracionService.obtenerTodasValoracion().size());
 			   
@@ -62,11 +64,10 @@ public class ValoracionController {
 	            .getAuthentication();
 	    UserDetails userDetail = (UserDetails) auth.getPrincipal();
 	    
-	    System.out.println(userDetail.getUsername());
 	    try {
 	    	PoIs poiEncontrado = poiService.encontrarUnPoi(codigo);
 	    	nuevaValoracion.setPoiCreador(poiEncontrado);
-			System.out.println(nuevaValoracion.getPoiCreador().getCodPoI());
+			//System.out.println(nuevaValoracion.getPoiCreador().getCodPoI());
 			Turista turistaEncontrado = turistaService.encontrarUnTuristaPorEmail(userDetail.getUsername());
 			if (turistaEncontrado != null) {
 				
@@ -74,73 +75,118 @@ public class ValoracionController {
 					nuevaValoracion.setComentario(null);
 				}
 				else {turistaEncontrado.setPuntos(turistaEncontrado.getPuntos()+5);}
-				
 				if(nuevaValoracion.getUnaValoracion() != 0) {
 					turistaEncontrado.setPuntos(turistaEncontrado.getPuntos()+8);}
+				nuevaValoracion.setEmail(userDetail.getUsername());
+				nuevaValoracion.setFechaComentario(LocalDate.now());
+				nuevaValoracion.setHoraComentario(LocalTime.now());
+				nuevaValoracion.setTuristaCreador(turistaEncontrado);	
+				
 				
 				valoracionService.guardarValoracion(nuevaValoracion);
-				nuevaValoracion.setTuristaCreador(turistaEncontrado);
-				turistaService.guardarTurista(turistaEncontrado);	
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			
 			e.printStackTrace();
 		}
-		return "redirect:/cargar/poi";
+		return "redirect:/punto";
 	}
 	
 	
 	
-	@GetMapping("/valoracion/editar/{idTurista}")
-	public String editarValoracion(Model model, @PathVariable(name="idTurista") int id) throws Exception {
+	@GetMapping("/valoracion/editar/{idValoracion}")
+	public String editarValoracion(Model model, @PathVariable(name="idValoracion")Integer id) throws Exception {
 		try {
 			Valoracion valoracionEncontrada = valoracionService.encontrarValoracionId(id);
-			model.addAttribute("unaValoracion", valoracionEncontrada);
+			model.addAttribute("valoracion", valoracionEncontrada);
 		    model.addAttribute("editMode", "true");
 			
 		}
 		catch (Exception e) {
 			model.addAttribute("formUsuarioErrorMessage",e.getMessage());
-			model.addAttribute("unaValoracion", valoracionService.crearUnaValoracion());
+			model.addAttribute("valoracion", valoracionService.crearUnaValoracion());
 			model.addAttribute("editMode", "false");
 		}
-		
-		model.addAttribute("valoraciones" , valoracionService.obtenerTodasValoracion());
-		return("punto");
+
+		return("cargar_valoracion");
 		
 	}
-	
-	@PostMapping("/valoracion/modificar")
-	public String modificarValoracion(@ModelAttribute("unaValoracion") Valoracion valoracionModificada, Model model) {
+
+	@PostMapping(value="/valoracion/modificar", consumes = "multipart/form-data")
+	public String modificarValoracion(@ModelAttribute("valoracion") Valoracion valoracionModificada, Model model) throws Exception{
 		try {
 			valoracionService.modificarValoracion(valoracionModificada);
-			model.addAttribute("unaValoracion", new Valoracion());
+			model.addAttribute("valoracion", new Valoracion());
 			model.addAttribute("editMode", "false");
 			
 		} catch (Exception e) {
 			model.addAttribute("formUsuarioErrorMessage",e.getMessage());
-			model.addAttribute("unaValoracion", valoracionModificada);
-			model.addAttribute("valoraciones", valoracionService.obtenerTodasValoracion());
+			model.addAttribute("valoracion", valoracionModificada);
 			model.addAttribute("editMode", "true");
 		}
 		model.addAttribute("valoraciones", valoracionService.obtenerTodasValoracion());
 		return("modificarvaloracion");
 	}
 	
-	
-	@GetMapping("/valoracion/eliminarValoracion/{idTurista}")
-	public String eliminarValoracion(Model model, @PathVariable(name="idTurista") int id) {		
-		try {	
-			valoracionService.eliminarValoracion(id);
-		}
-		catch(Exception e){
-			model.addAttribute("listErrorMessage",e.getMessage());
-		}			
-		return "redirect:/valoracion/mostrar";
-	}
-	
 
+	@GetMapping("/valoracion/eliminar/{idValoracion}")
+	public String eliminarPoI(Model model, @PathVariable(name ="idValoracion")Integer id) {
+			try {
+				valoracionService.eliminarValoracion(id);
+				
+			}catch(Exception e){
+				model.addAttribute("listErrorMessage",e.getMessage());
+			}
+			return "redirect:/mis/valoraciones";
+		}
+	@GetMapping({"/cargar_valoracion/{codPoI}"} )
+	public String cargarvalo(Model model,@PathVariable(name="codPoI") Integer id)throws Exception{
+		PoIs poiEncontrado=poiService.encontrarUnPoi(id);
+		model.addAttribute("poiEncontrado", poiEncontrado);
+		model.addAttribute("valoracion", valoracionService.crearUnaValoracion());
+		return "cargar_valoracion";
+	}
+	@GetMapping({"/punto"})
+	public String cargarpunto(Model model){
+		model.addAttribute("pois", poiService.obtenerTodosPoIs());
+		model.addAttribute("valoracion", valoracionService.crearUnaValoracion());
+		return "punto";
+	}
+	@GetMapping({"/valoraciones/{codPoI}"})
+	public String valoracionPois(Model model,@PathVariable(name="codPoI")Integer id)throws Exception{
+		PoIs poiEncontrado=poiService.encontrarUnPoi(id);
+		System.out.println("entro a ver las valoraciones");
+		model.addAttribute("pois", poiEncontrado);
+		//model.addAttribute("valoracion", valoracionService.obtenerTodasValoracion());
+		model.addAttribute("valoracion", valoracionService.obtenerMisValoraciones(poiEncontrado));
+	
+		
+		return "valoraciones";
+	}
+	@GetMapping("/mis/valoraciones")
+	public String cargarMisPoIs(Model model) {		
+
+		Authentication auth = SecurityContextHolder
+	            .getContext()
+	            .getAuthentication();
+	    UserDetails userTurista = (UserDetails) auth.getPrincipal();
+	    try {
+			Turista turistaEncontrado = turistaService.encontrarUnTuristaPorEmail(userTurista.getUsername());
+			
+			if (turistaEncontrado != null) {
+
+				model.addAttribute("valoraciones", valoracionService.obtenerMioValoraciones(turistaEncontrado));
+			
+				
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return("misvaloraciones");
+	}
 }
 
 
