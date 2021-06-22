@@ -144,6 +144,11 @@ public String eliminarPoI(Model model, @PathVariable(name ="codPoI")int codPoI) 
 		return "home";
 	}
 	
+	@GetMapping({"/canjear/puntos"})
+	public String canjearp(Model model){
+
+		return "canjearpuntos";
+	}
 	
 	
 	
