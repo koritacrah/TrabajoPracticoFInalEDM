@@ -25,9 +25,9 @@ public class AutenticationSuccessHandler implements AuthenticationSuccessHandler
 		boolean userConsultor = false;
 		boolean userRegistrador = false;
 		boolean userNormal = false;
-		System.out.println("aaaaaaaaaaaaa");
+
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-		System.out.println("bbbbbbbbbbbbb");
+
 
 		for (GrantedAuthority grantedAuthority : authorities) {
 			if (grantedAuthority.getAuthority().equals("userNormal")) {
@@ -45,7 +45,7 @@ public class AutenticationSuccessHandler implements AuthenticationSuccessHandler
 
 	}
 		if (userNormal) {
-			redirectStrategy.sendRedirect(request, response, "/turista/perfiles");
+			redirectStrategy.sendRedirect(request, response, "/home");
 		} else {
 			if (userConsultor) {
 				redirectStrategy.sendRedirect(request, response, "/consultor");

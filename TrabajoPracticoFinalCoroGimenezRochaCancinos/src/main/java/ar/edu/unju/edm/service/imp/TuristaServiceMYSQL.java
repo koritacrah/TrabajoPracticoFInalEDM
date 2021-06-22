@@ -75,4 +75,6 @@ public class TuristaServiceMYSQL implements ITuristaService {
 		return (List<Turista>) iTuristaDAO.findAll();
 	}
 	
+
+	
 }

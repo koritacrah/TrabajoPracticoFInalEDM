@@ -1,6 +1,8 @@
 package ar.edu.unju.edm.model;
 
+
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
@@ -24,33 +27,56 @@ public class Valoracion {
 	@Column
 	private Integer idValoracion;
 	@Column
-	private int valoracion;
+	private Integer unaValoracion;
 	@Column
 	private String comentario;
 	@ManyToOne
 	@JoinColumn(name="idTurista")
 	private Turista turistaCreador;
+	private String email;
 	@ManyToOne
 	@JoinColumn(name="codPoI")
 	private PoIs poiCreador;
+	
 	@Column
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private LocalDate fechaComentario;
-	
-	
-	
+	@Column
+	@DateTimeFormat(pattern = "hh:mm:ss")
+	private LocalTime horaComentario;
 
+	
+	
+	public LocalTime getHoraComentario() {
+		return horaComentario;
+	}
+	public void setHoraComentario(LocalTime horaComentario) {
+		this.horaComentario = horaComentario;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public LocalDate getFechaComentario() {
+		return fechaComentario;
+	}
+	public void setFechaComentario(LocalDate fechaComentario) {
+		this.fechaComentario = fechaComentario;
+	}
 	public Integer getIdValoracion() {
 		return idValoracion;
 	}
 	public void setIdValoracion(Integer idValoracion) {
 		this.idValoracion = idValoracion;
 	}
-	public int getValoracion() {
-		return valoracion;
+	
+	public Integer getUnaValoracion() {
+		return unaValoracion;
 	}
-	public void setValoracion(int valoracion) {
-		this.valoracion = valoracion;
+	public void setUnaValoracion(Integer unaValoracion) {
+		this.unaValoracion = unaValoracion;
 	}
 	public String getComentario() {
 		return comentario;
@@ -70,12 +96,7 @@ public class Valoracion {
 	public void setPoiCreador(PoIs poiCreador) {
 		this.poiCreador = poiCreador;
 	}
-	public LocalDate getFechaComentario() {
-		return fechaComentario;
-	}
-	public void setFechaComentario(LocalDate fechaComentario) {
-		this.fechaComentario = fechaComentario;
-	}
+
 	
 
 	

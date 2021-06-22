@@ -28,19 +28,27 @@ import ar.edu.unju.edm.model.PoIs;
 import ar.edu.unju.edm.model.Turista;
 import ar.edu.unju.edm.service.IPoIsService;
 import ar.edu.unju.edm.service.ITuristaService;
+import ar.edu.unju.edm.service.IValoracionService;
+
 
 
 @Controller
 public class PoIsController {
 	private static final Log LOGGER = LogFactory.getLog(PoIsController.class);
-	
+	@Autowired
+	@Qualifier("implementacionMYSQLValoracion")
+	IValoracionService valoracionService;
 	@Autowired
 	@Qualifier("implementacionMYSQLPoI")
 	IPoIsService poiService;
 	@Autowired
-	@Qualifier("implementacionMYSQLturista")
+
 	ITuristaService turistaService;
-	
+	@Autowired
+	Turista unTurista;
+	@Autowired
+	PoIs poiEncontrado;
+
 	@GetMapping("/cargar/poi")
 	public String crearPoI(Model model) {
 		LOGGER.info("METHOD: ingresando el metodo cargar");
@@ -48,8 +56,9 @@ public class PoIsController {
 		model.addAttribute("editMode", "false");
 		return ("cargarpoi");
 	}
+
 	@PostMapping(value="/poi/guardar", consumes = "multipart/form-data")
-	public String guardarNuevoPoI(@RequestParam("file") MultipartFile file, @RequestParam("file1") MultipartFile file1, @RequestParam("file2")  MultipartFile file2 , @ModelAttribute("poiGuardado") PoIs nuevoPoI, BindingResult resultado ,Model model)  throws IOException {
+	public String guardarNuevoPoI(@RequestParam("file") MultipartFile file, @RequestParam("file1") MultipartFile file1, @RequestParam("file2")  MultipartFile file2 , @ModelAttribute("poiGuardado") PoIs nuevoPoI, BindingResult resultado ,Model model,Authentication authentication)  throws IOException {
 		byte[] content = file.getBytes();
 		String base64 = Base64.getEncoder().encodeToString(content);
 		nuevoPoI.setImagen(base64);
@@ -71,17 +80,42 @@ public class PoIsController {
 		}
 		else 
 		{
-			//deberia tener un try por si ocurre algun error
+			//declarando el autentiqueishon
 			LOGGER.info("METHOD: ingresando el metodo Guardar");
+			Authentication auth = SecurityContextHolder
+		            .getContext()
+		            .getAuthentication();
+		    UserDetails userTurista = (UserDetails) auth.getPrincipal();
+		    try {
+				Turista turistaEncontrado = turistaService.encontrarUnTuristaPorEmail(userTurista.getUsername());
+				
+				if (turistaEncontrado != null) {
 					
-			poiService.guardarPoIs(nuevoPoI);
+					turistaEncontrado.setPuntos(turistaEncontrado.getPuntos() + 10);
+					System.out.println(turistaEncontrado.getPuntos());
+					
+					nuevoPoI.setTuristaAutor(turistaEncontrado);
+					poiService.guardarPoIs(nuevoPoI);
+					model.addAttribute("pois", poiService.obtenerTodosPoIs());
+				
+					
+				}
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    
+			/*Turista turistaEncontrado=turistaService.encontrarUnTurista(userTurista.getUsername());		
+			poiService.guardarPoIs(nuevoPoI);*/
+			
 			//trabajarConFechas();
-			return "redirect:/cargar/poi";
+			return "redirect:/mis/pois";
 		}
 	}
 
 	@GetMapping("/poi/editar/{codPoI}")
-	public String editarCliente(Model model, @PathVariable(name="codPoI") int id) throws Exception {
+	public String editarCliente(Model model, @PathVariable(name="codPoI") Integer id) throws Exception {
 		try {
 			PoIs poiEncontrado = poiService.encontrarUnPoi(id);
 
@@ -126,26 +160,44 @@ public class PoIsController {
 		return "redirect:/cargar/poi";
 	}
 	@GetMapping("/poi/eliminar/{codPoI}")
-public String eliminarPoI(Model model, @PathVariable(name ="codPoI")int codPoI) {
+public String eliminarPoI(Model model, @PathVariable(name ="codPoI")Integer codPoI) {
 		try {
 			poiService.eliminarPoI(codPoI);
 			
 		}catch(Exception e){
 			model.addAttribute("listErrorMessage",e.getMessage());
 		}
-		return "redirect:/cargar/poi";
+		return "redirect:/mis/pois";
 	}
 	
 	
 	@GetMapping("/mis/pois")
 	public String cargarMisPoIs(Model model) {		
-		model.addAttribute("Poi", poiService.obtenerPoiNuevo());
-		model.addAttribute("pois", poiService.obtenerTodosPoIs());
+
+		Authentication auth = SecurityContextHolder
+	            .getContext()
+	            .getAuthentication();
+	    UserDetails userTurista = (UserDetails) auth.getPrincipal();
+	    try {
+			Turista turistaEncontrado = turistaService.encontrarUnTuristaPorEmail(userTurista.getUsername());
+			
+			if (turistaEncontrado != null) {
+				
+				
+				model.addAttribute("Poi", poiService.obtenerPoiNuevo());
+				model.addAttribute("pois", poiService.obtenerMisPoIs(turistaEncontrado));
+			
+				
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return("mispoiss");
 	}
 	@GetMapping({"/home"})
 	public String cargarhome(Model model){
-		model.addAttribute("pois", poiService.obtenerTodosPoIs());
 
 		return "home";
 	}
@@ -266,6 +318,47 @@ public String eliminarPoI(Model model, @PathVariable(name ="codPoI")int codPoI) 
 	
 	
 	
+	
+	/*@GetMapping("/cargar_valoracion/{codPoI}")
+	public String cargarValoracion(Model model,@PathVariable(name="codPoI") Integer codigo) {
+		System.out.println("entro");
+		Valoracion valoracionNueva = valoracionService.crearUnaValoracion();
+		/*try {
+			valoracionNueva.setPoiCreador(poiService.encontrarUnPoi(codigo));
+			System.out.println(valoracionNueva.getPoiCreador().getCodPoI());
+			model.addAttribute("valoracion", valoracionNueva);
+		    model.addAttribute("valoraciones", valoracionService.obtenerTodasValoracion());
+		    model.addAttribute("pois", poiService.obtenerTodosPoIs());
+			model.addAttribute("valoracion", valoracionService.crearUnaValoracion());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+		try {	
+			poiEncontrado = poiService.encontrarUnPoi(codigo);			
+			Valoracion valoracion = valoracionService.crearUnaValoracion();	
+			
+			valoracion.setPoiCreador(poiEncontrado);			
+			Authentication auth = SecurityContextHolder
+		            .getContext()
+		            .getAuthentication();
+		    UserDetails userTurista = (UserDetails) auth.getPrincipal();
+		   
+		    Turista turistaEncontrado = turistaService.encontrarUnTuristaPorEmail(userTurista.getUsername());
+		    
+		    valoracion.setTuristaCreador(turistaEncontrado);
+	    
+		    model.addAttribute("unaValoracion",valoracion);
+		  
+		   
+		    		
+		}
+		catch (Exception e) {
+			model.addAttribute("formUsuarioErrorMessage",e.getMessage());		
+		}
+	    return ("cargar_valoracion");
+	}*/
 	
 }
 
