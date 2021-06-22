@@ -1,14 +1,18 @@
 package ar.edu.unju.edm.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -29,7 +33,6 @@ public class PoIs {
 	@Column
 	private String nombre;
 	@Column
-	
 	private String descripcion;
 	@Column
 	private String etiqueta;
@@ -66,8 +69,24 @@ public class PoIs {
 	@JoinColumn(name = "idTurista")
 	private Turista turistaAutor;
 	
+	@OneToMany(mappedBy = "poiCreador", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	 private List<Valoracion> valoracion;
 	
-
+	private double unaValoracion=0;
+	
+	
+	public double getUnaValoracion() {
+		return unaValoracion;
+	}
+	public void setUnaValoracion(double unaValoracion) {
+		this.unaValoracion = unaValoracion;
+	}
+	public List<Valoracion> getValoracion() {
+		return valoracion;
+	}
+	public void setValoracion(List<Valoracion> valoracion) {
+		this.valoracion = valoracion;
+	}
 	public String getImagen1() {
 		return imagen1;
 	}

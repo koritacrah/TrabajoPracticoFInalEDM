@@ -1,6 +1,7 @@
 package ar.edu.unju.edm.service.imp;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -50,8 +51,10 @@ ITuristaDAO iTuristaDAO;
 	@Override
 	public void eliminarPoI(Integer codPoI) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println("entro del eliminar poi service");
 		PoIs PoIaEliminar =IPoIsDAO.findBycodPoI(codPoI).orElseThrow(()->new Exception("El punto de interes no fue encontrado"));
 		IPoIsDAO.delete(PoIaEliminar);
+		System.out.println("salio del eliminar poi service");
 	}
 
 	@Override
@@ -95,6 +98,12 @@ ITuristaDAO iTuristaDAO;
 		// TODO Auto-generated method stub
 		return (ArrayList<PoIs>) IPoIsDAO.findAllByTuristaAutor(turistaAutor);
 	
+	}
+
+	@Override
+	public List<PoIs> getOrdenarPorLaValoracion() {
+		// TODO Auto-generated method stub
+		return IPoIsDAO.getOrdenarPorLaValoracion();
 	}
 
 

@@ -1,10 +1,15 @@
 package ar.edu.unju.edm.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -40,8 +45,17 @@ public class Turista {
 	private int puntos;
 	@Column
 	private String perfil;
-
+	@OneToMany(mappedBy = "turistaAutor", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private List<PoIs> pois;
 	
+	public List<PoIs> getPois() {
+		return pois;
+	}
+
+	public void setPois(List<PoIs> pois) {
+		this.pois = pois;
+	}
+
 	public Turista() {
 		// TODO Auto-generated constructor stub
 	}

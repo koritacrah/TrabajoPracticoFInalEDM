@@ -90,8 +90,8 @@ public class PoIsController {
 					
 					turistaEncontrado.setPuntos(turistaEncontrado.getPuntos() + 10);
 					System.out.println(turistaEncontrado.getPuntos());
-					
 					nuevoPoI.setTuristaAutor(turistaEncontrado);
+					nuevoPoI.setEmail(turistaEncontrado.getEmail());
 					poiService.guardarPoIs(nuevoPoI);
 					model.addAttribute("pois", poiService.obtenerTodosPoIs());
 				
@@ -154,12 +154,14 @@ public class PoIsController {
 			model.addAttribute("poi", poiModificado);			
 			model.addAttribute("editMode", "true");
 		}
-		return "redirect:/cargar/poi";
+		return "redirect:/mis/pois";
 	}
 	@GetMapping("/poi/eliminar/{codPoI}")
 public String eliminarPoI(Model model, @PathVariable(name ="codPoI")Integer codPoI) {
 		try {
+			System.out.println("entro a eliminar poi");
 			poiService.eliminarPoI(codPoI);
+			System.out.println("salio del eliminar poi");
 			
 		}catch(Exception e){
 			model.addAttribute("listErrorMessage",e.getMessage());
