@@ -12,8 +12,10 @@
 
 <body class="bodym">
 
-<p class="card-text" id="etiqueta" th:text=" 'usted tiene ' +${puntos} + ' puntos en su cuenta'"><small
-							class="text-muted">etiqueta</small></p>
+<div th:insert="layouts/header :: header" ></div>
+
+<b class="titulos" id="etiqueta" th:text=" 'usted tiene ' +${puntos} + ' puntos en su cuenta'"><small
+							class="text-muted">etiqueta</small></b>
 
 
 

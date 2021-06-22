@@ -227,9 +227,11 @@ public String eliminarPoI(Model model, @PathVariable(name ="codPoI")Integer codP
 	    try {
 			Turista turistaEncontrado = turistaService.encontrarUnTuristaPorEmail(userDetail.getUsername());
 			if (turistaEncontrado != null) {
-				if(turistaEncontrado.getPuntos()>10) {
+				if(turistaEncontrado.getPuntos()>=10) {
 					model.addAttribute("negativo", "false");
 					turistaEncontrado.setPuntos(turistaEncontrado.getPuntos()-10);
+					turistaService.guardarTurista(turistaEncontrado);
+					
 				}else {
 				return "imposible";
 				}
@@ -242,7 +244,7 @@ public String eliminarPoI(Model model, @PathVariable(name ="codPoI")Integer codP
 			
 			e.printStackTrace();
 		}
-		return "redirect:/canjearpuntos";
+		return "redirect:/canjear/puntos";
 	    
 		
 		
@@ -261,7 +263,7 @@ public String eliminarPoI(Model model, @PathVariable(name ="codPoI")Integer codP
 	    try {
 			Turista turistaEncontrado = turistaService.encontrarUnTuristaPorEmail(userDetail.getUsername());
 			if (turistaEncontrado != null) {
-				if(turistaEncontrado.getPuntos()>20) {
+				if(turistaEncontrado.getPuntos()>=20) {
 					model.addAttribute("negativo", "false");
 					turistaEncontrado.setPuntos(turistaEncontrado.getPuntos()-20);
 				}else {
@@ -276,7 +278,7 @@ public String eliminarPoI(Model model, @PathVariable(name ="codPoI")Integer codP
 			
 			e.printStackTrace();
 		}
-		return "redirect:/canjearpuntos";
+		return "redirect:/canjear/puntos";
 	    
 		
 		
@@ -293,7 +295,7 @@ public String eliminarPoI(Model model, @PathVariable(name ="codPoI")Integer codP
 	    try {
 			Turista turistaEncontrado = turistaService.encontrarUnTuristaPorEmail(userDetail.getUsername());
 			if (turistaEncontrado != null) {
-				if(turistaEncontrado.getPuntos()>30) {
+				if(turistaEncontrado.getPuntos()>=30) {
 					model.addAttribute("negativo", "false");
 					turistaEncontrado.setPuntos(turistaEncontrado.getPuntos()-30);
 				}else {
@@ -308,7 +310,7 @@ public String eliminarPoI(Model model, @PathVariable(name ="codPoI")Integer codP
 			
 			e.printStackTrace();
 		}
-		return "redirect:/canjearpuntos";
+		return "redirect:/canjear/puntos";
 	    
 		
 		
