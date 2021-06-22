@@ -31,6 +31,7 @@ import ar.edu.unju.edm.service.ITuristaService;
 import ar.edu.unju.edm.service.IValoracionService;
 
 
+
 @Controller
 public class PoIsController {
 	private static final Log LOGGER = LogFactory.getLog(PoIsController.class);
@@ -41,11 +42,13 @@ public class PoIsController {
 	@Qualifier("implementacionMYSQLPoI")
 	IPoIsService poiService;
 	@Autowired
+
 	ITuristaService turistaService;
 	@Autowired
 	Turista unTurista;
 	@Autowired
 	PoIs poiEncontrado;
+
 	@GetMapping("/cargar/poi")
 	public String crearPoI(Model model) {
 		LOGGER.info("METHOD: ingresando el metodo cargar");
@@ -198,6 +201,120 @@ public String eliminarPoI(Model model, @PathVariable(name ="codPoI")Integer codP
 
 		return "home";
 	}
+	
+	@GetMapping({"/canjear/puntos"})
+	public String canjearp(Model model) throws Exception{
+		
+		Authentication auth = SecurityContextHolder
+	            .getContext()
+	            .getAuthentication();
+	    UserDetails userDetail = (UserDetails) auth.getPrincipal();
+		Turista turistaEncontrado = turistaService.encontrarUnTuristaPorEmail(userDetail.getUsername());
+	
+		model.addAttribute("puntos", turistaEncontrado.getPuntos());
+
+		return "canjearpuntos";
+	}
+	
+	@GetMapping("/canjear/canjear10")
+	public String canjear10(Model model){
+		Authentication auth = SecurityContextHolder
+	            .getContext()
+	            .getAuthentication();
+	    UserDetails userDetail = (UserDetails) auth.getPrincipal();
+	    
+	    
+	    try {
+			Turista turistaEncontrado = turistaService.encontrarUnTuristaPorEmail(userDetail.getUsername());
+			if (turistaEncontrado != null) {
+				if(turistaEncontrado.getPuntos()>10) {
+					model.addAttribute("negativo", "false");
+					turistaEncontrado.setPuntos(turistaEncontrado.getPuntos()-10);
+				}else {
+				return "imposible";
+				}
+				
+				
+		
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+		}
+		return "redirect:/canjearpuntos";
+	    
+		
+		
+	}
+	
+	
+	
+	@GetMapping("/canjear/canjear20")
+	public String canjear20(Model model){
+		Authentication auth = SecurityContextHolder
+	            .getContext()
+	            .getAuthentication();
+	    UserDetails userDetail = (UserDetails) auth.getPrincipal();
+	    
+	    
+	    try {
+			Turista turistaEncontrado = turistaService.encontrarUnTuristaPorEmail(userDetail.getUsername());
+			if (turistaEncontrado != null) {
+				if(turistaEncontrado.getPuntos()>20) {
+					model.addAttribute("negativo", "false");
+					turistaEncontrado.setPuntos(turistaEncontrado.getPuntos()-20);
+				}else {
+					return "imposible";
+				}
+				
+				
+		
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+		}
+		return "redirect:/canjearpuntos";
+	    
+		
+		
+	}
+	
+	@GetMapping("/canjear/canjear30")
+	public String canjear30(Model model){
+		Authentication auth = SecurityContextHolder
+	            .getContext()
+	            .getAuthentication();
+	    UserDetails userDetail = (UserDetails) auth.getPrincipal();
+	    
+	    
+	    try {
+			Turista turistaEncontrado = turistaService.encontrarUnTuristaPorEmail(userDetail.getUsername());
+			if (turistaEncontrado != null) {
+				if(turistaEncontrado.getPuntos()>30) {
+					model.addAttribute("negativo", "false");
+					turistaEncontrado.setPuntos(turistaEncontrado.getPuntos()-30);
+				}else {
+					return "imposible";
+				}
+				
+				
+		
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+		}
+		return "redirect:/canjearpuntos";
+	    
+		
+		
+	}
+	
+	
 	
 	
 	
