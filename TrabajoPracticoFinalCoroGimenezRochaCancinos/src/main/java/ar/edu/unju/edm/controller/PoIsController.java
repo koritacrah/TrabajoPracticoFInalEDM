@@ -11,6 +11,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,7 +25,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import ar.edu.unju.edm.model.PoIs;
+import ar.edu.unju.edm.model.Turista;
 import ar.edu.unju.edm.service.IPoIsService;
+import ar.edu.unju.edm.service.ITuristaService;
 
 
 @Controller
@@ -31,9 +36,10 @@ public class PoIsController {
 	
 	@Autowired
 	@Qualifier("implementacionMYSQLPoI")
-	
 	IPoIsService poiService;
-	
+	@Autowired
+	@Qualifier("implementacionMYSQLturista")
+	ITuristaService turistaService;
 	
 	@GetMapping("/cargar/poi")
 	public String crearPoI(Model model) {
@@ -145,10 +151,119 @@ public String eliminarPoI(Model model, @PathVariable(name ="codPoI")int codPoI) 
 	}
 	
 	@GetMapping({"/canjear/puntos"})
-	public String canjearp(Model model){
+	public String canjearp(Model model) throws Exception{
+		
+		Authentication auth = SecurityContextHolder
+	            .getContext()
+	            .getAuthentication();
+	    UserDetails userDetail = (UserDetails) auth.getPrincipal();
+		Turista turistaEncontrado = turistaService.encontrarUnTuristaPorEmail(userDetail.getUsername());
+	
+		model.addAttribute("puntos", turistaEncontrado.getPuntos());
 
 		return "canjearpuntos";
 	}
+	
+	@GetMapping("/canjear/canjear10")
+	public String canjear10(Model model){
+		Authentication auth = SecurityContextHolder
+	            .getContext()
+	            .getAuthentication();
+	    UserDetails userDetail = (UserDetails) auth.getPrincipal();
+	    
+	    
+	    try {
+			Turista turistaEncontrado = turistaService.encontrarUnTuristaPorEmail(userDetail.getUsername());
+			if (turistaEncontrado != null) {
+				if(turistaEncontrado.getPuntos()>10) {
+					model.addAttribute("negativo", "false");
+					turistaEncontrado.setPuntos(turistaEncontrado.getPuntos()-10);
+				}else {
+				return "imposible";
+				}
+				
+				
+		
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+		}
+		return "redirect:/canjearpuntos";
+	    
+		
+		
+	}
+	
+	
+	
+	@GetMapping("/canjear/canjear20")
+	public String canjear20(Model model){
+		Authentication auth = SecurityContextHolder
+	            .getContext()
+	            .getAuthentication();
+	    UserDetails userDetail = (UserDetails) auth.getPrincipal();
+	    
+	    
+	    try {
+			Turista turistaEncontrado = turistaService.encontrarUnTuristaPorEmail(userDetail.getUsername());
+			if (turistaEncontrado != null) {
+				if(turistaEncontrado.getPuntos()>20) {
+					model.addAttribute("negativo", "false");
+					turistaEncontrado.setPuntos(turistaEncontrado.getPuntos()-20);
+				}else {
+					return "imposible";
+				}
+				
+				
+		
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+		}
+		return "redirect:/canjearpuntos";
+	    
+		
+		
+	}
+	
+	@GetMapping("/canjear/canjear30")
+	public String canjear30(Model model){
+		Authentication auth = SecurityContextHolder
+	            .getContext()
+	            .getAuthentication();
+	    UserDetails userDetail = (UserDetails) auth.getPrincipal();
+	    
+	    
+	    try {
+			Turista turistaEncontrado = turistaService.encontrarUnTuristaPorEmail(userDetail.getUsername());
+			if (turistaEncontrado != null) {
+				if(turistaEncontrado.getPuntos()>30) {
+					model.addAttribute("negativo", "false");
+					turistaEncontrado.setPuntos(turistaEncontrado.getPuntos()-30);
+				}else {
+					return "imposible";
+				}
+				
+				
+		
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+		}
+		return "redirect:/canjearpuntos";
+	    
+		
+		
+	}
+	
+	
+	
 	
 	
 	
