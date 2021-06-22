@@ -19,5 +19,6 @@ public interface IPoIsDAO extends CrudRepository <PoIs, Integer>{
 	public List<PoIs> obtenerPoIs();
 	public List<PoIs> findAllByTuristaAutor(Turista turistaAutor);
 	
-
+	@Query(value ="SELECT*FROM po_is ORDER BY una_valoracion DESC",nativeQuery=true)
+	public List<PoIs>getOrdenarPorLaValoracion();
 }

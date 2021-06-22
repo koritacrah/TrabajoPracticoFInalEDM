@@ -18,4 +18,8 @@ public interface IValoracionDAO extends CrudRepository <Valoracion, Integer> {
 	
 	public List<Valoracion> findAllByPoiCreador(PoIs poiCreador);
 	public List<Valoracion> findAllByTuristaCreador(Turista turistaCreador);
+	
+	@Query(value ="SELECT*FROM valoracion ORDER BY fecha_comentario,hora_comentario DESC",nativeQuery=true)
+	public List<Valoracion> findAllByOrdenarValoracion();
+
 }

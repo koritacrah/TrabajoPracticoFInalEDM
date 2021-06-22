@@ -37,8 +37,10 @@ public class ValoracionServiceMYSQL implements IValoracionService {
 	public void eliminarValoracion(Integer idValoracion) throws Exception {
 		// TODO Auto-generated method stub
 		//Valoracion valoracionEliminar=valoracionDAO.findByIdValoracion(idValoracion).orElseThrow(()->new Exception("Valoracion no encontrada"));
-		Valoracion valoracionEliminar = valoracionDAO.findById(idValoracion).orElseThrow(()->new Exception("Valoracion no encontrada"));
-	    valoracionDAO.delete(valoracionEliminar);
+		/*Valoracion valoracionEliminar = valoracionDAO.findById(idValoracion).orElseThrow(()->new Exception("Valoracion no encontrada"));
+	    valoracionDAO.delete(valoracionEliminar);*/
+		System.out.println("entroooooooooaservice");
+		valoracionDAO.deleteById(idValoracion);
 	}
 
 	@Override
@@ -79,6 +81,12 @@ public class ValoracionServiceMYSQL implements IValoracionService {
 	public ArrayList<Valoracion> obtenerMioValoraciones(Turista turistaCreador) {
 		// TODO Auto-generated method stub
 		return (ArrayList<Valoracion>) valoracionDAO.findAllByTuristaCreador(turistaCreador);
+	}
+
+	@Override
+	public List<Valoracion> findAllByOrdenarValoracion() {
+		// TODO Auto-generated method stub
+		return valoracionDAO.findAllByOrdenarValoracion();
 	}
 
 	
