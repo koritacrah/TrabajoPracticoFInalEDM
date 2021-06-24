@@ -23,6 +23,7 @@ s
 			<div class="card mb-3" id="carta">
 
 				<div class="card-body">
+				<p class="card-title" th:text="'nombre del punto de interes: '+${v.poiCreador.nombre}">nombre</p>
 					<p class="card-title" th:text="'comentario: '+${v.comentario}">comentario</p>
 					<p class="card-text" th:text="'valoracion: '+${v.unaValoracion}">valoracion</p>
 					<p class="card-text" th:text="'email del creador : '+${v.email}">email</p>

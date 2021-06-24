@@ -56,7 +56,6 @@ public class ValoracionController {
 		
 	    return ("misvaloraciones");
 	}
-	
 	@PostMapping("/valoracion/guardar/{codPoI}")
 	public String guardarNuevoValoracion(@Valid @ModelAttribute("unaValoracion") Valoracion nuevaValoracion,@PathVariable(name="codPoI") Integer codigo,BindingResult resultado, Model model) {		
 		//System.out.println(valoracionService.obtenerTodasValoraciones());
@@ -126,6 +125,7 @@ public class ValoracionController {
 	@PostMapping(value="/valoracion/modificar", consumes = "multipart/form-data")
 	public String modificarValoracion(@ModelAttribute("valoracion") Valoracion valoracionModificada, Model model) throws Exception{
 		try {
+			System.out.println(valoracionModificada.getComentario());
 			valoracionService.modificarValoracion(valoracionModificada);
 			model.addAttribute("valoracion", new Valoracion());
 			model.addAttribute("editMode", "false");
@@ -135,8 +135,7 @@ public class ValoracionController {
 			model.addAttribute("valoracion", valoracionModificada);
 			model.addAttribute("editMode", "true");
 		}
-		model.addAttribute("valoraciones", valoracionService.obtenerTodasValoracion());
-		return("modificarvaloracion");
+		return "redirect:/mis/valoraciones";
 	}
 	
 
@@ -179,9 +178,9 @@ public class ValoracionController {
 
 	@GetMapping({"/punto"})
 	public String cargarpunto(Model model){
+
 		model.addAttribute("pois", poiService.getOrdenarPorLaValoracion());
 		model.addAttribute("valoracion", valoracionService.crearUnaValoracion());
-		
 		return "punto";
 	}
 	@GetMapping({"/valoraciones/{codPoI}"})

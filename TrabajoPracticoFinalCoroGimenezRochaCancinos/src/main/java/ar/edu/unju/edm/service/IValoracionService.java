@@ -17,7 +17,7 @@ public interface IValoracionService {
 	public void modificarValoracion (Valoracion valModificado)throws Exception;
 	public List<Valoracion> obtenerTodasValoracion();
 	public Valoracion encontrarValoracionId(int idValoracion) throws Exception;
-	public ArrayList<Valoracion> obtenerMisValoraciones(PoIs poiCreador);
+	public List<Valoracion> obtenerMisValoraciones(PoIs poiCreador);
 	public ArrayList<Valoracion> obtenerMioValoraciones(Turista turistaCreador);
 	public List<Valoracion> findAllByOrdenarValoracion();
 }

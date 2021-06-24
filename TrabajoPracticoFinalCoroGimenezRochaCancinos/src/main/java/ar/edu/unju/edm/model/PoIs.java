@@ -69,8 +69,8 @@ public class PoIs {
 	@JoinColumn(name = "idTurista")
 	private Turista turistaAutor;
 	
-	@OneToMany(mappedBy = "poiCreador", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	 private List<Valoracion> valoracion;
+	@OneToMany(mappedBy = "poiCreador", fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
+	private List<Valoracion> valoracion;
 	
 	private double unaValoracion=0;
 	
