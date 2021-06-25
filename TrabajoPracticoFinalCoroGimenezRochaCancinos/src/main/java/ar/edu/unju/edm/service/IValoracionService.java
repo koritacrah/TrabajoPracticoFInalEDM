@@ -1,6 +1,6 @@
 package ar.edu.unju.edm.service;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -18,6 +18,6 @@ public interface IValoracionService {
 	public List<Valoracion> obtenerTodasValoracion();
 	public Valoracion encontrarValoracionId(int idValoracion) throws Exception;
 	public List<Valoracion> obtenerMisValoraciones(PoIs poiCreador);
-	public ArrayList<Valoracion> obtenerMioValoraciones(Turista turistaCreador);
+	public List<Valoracion> obtenerMioValoraciones(Turista turistaCreador);
 	public List<Valoracion> findAllByOrdenarValoracion();
 }

@@ -1,7 +1,6 @@
 
 package ar.edu.unju.edm.service.imp;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,9 +77,9 @@ public class ValoracionServiceMYSQL implements IValoracionService {
 	}
 
 	@Override
-	public ArrayList<Valoracion> obtenerMioValoraciones(Turista turistaCreador) {
+	public List<Valoracion> obtenerMioValoraciones(Turista turistaCreador) {
 		// TODO Auto-generated method stub
-		return (ArrayList<Valoracion>) valoracionDAO.findAllByTuristaCreador(turistaCreador);
+		return valoracionDAO.mostrarValoracionesEnTurista(turistaCreador.getIdTurista());
 	}
 
 	@Override
