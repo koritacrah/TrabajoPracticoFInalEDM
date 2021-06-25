@@ -18,9 +18,7 @@
 	<h1 class="titulos" th:unless="${editMode}">Agregar Punto de Interes</h1>
 	<h1 class="titulos" th:if="${editMode}">Modificar Punto de interes</h1>
 
-
-<form  th:object="${valoracion}" th:action="${editMode}?@{/valoracion/modificar/}:@{'/valoracion/guardar/'+${poiEncontrado.codPoI}}" method="post" enctype="multipart/form-data" >
-
+					
 								<div class="form-group row">
 									<label for="comentario" class="col-sm-2 col-form-label">Comentario</label>
 
@@ -35,6 +33,7 @@
 										este punto de interes</label>
 									<p class="valoracion col-form-label" >
 						
+									 
 									 <input id="radio1" type="radio" name="estrellas" value="5" th:field="${valoracion.unaValoracion}" >
    									 <label for="radio1">★</label>
    									 <input id="radio2" type="radio" name="estrellas" value="4" th:field="${valoracion.unaValoracion}" >

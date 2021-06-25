@@ -6,10 +6,11 @@
 	<link th:rel="stylesheet" type="text/css" th:href="@{/css/mpoi.css}" />
 	<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
 	<link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.11.2/css/all.css} " />
-
+	<link th:rel="stylesheet" type="text/css" th:href="@{/css/nicoleestilos.css}" />
 </head>
 
-<body class="bodym">
+<body class="body-home">
+
 
 <div th:insert="layouts/header :: header" ></div>
 
@@ -58,7 +59,8 @@
 					<p class="card-text" th:text="${p.etiqueta}"><small class="text-muted">etiqueta</small></p>
 					<a id="button" th:href="@{'/poi/editar/'+${p.codPoI}}">Editar</a> 
 					<a id="button" th:onclick="'javascript:confirmarEliminar(\''+${p.codPoI}+'\');'"> Eliminar</a>
-					<a id="button" th:href="@{'/valoracion/mostrar/'+${p.codPoI}}">valoracion</a>
+					<a id="button" th:href="@{/mis/valoraciones}">mis valoraciones</a>
+
                 
 				</div>
 			</div>

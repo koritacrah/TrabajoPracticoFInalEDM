@@ -6,13 +6,15 @@ import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
@@ -27,14 +29,16 @@ public class Valoracion {
 	@Column
 	private Integer idValoracion;
 	@Column
+	@NotNull (message="Debe valorar")
 	private Integer unaValoracion;
 	@Column
+	@NotBlank (message="Debe contener un comentario")
 	private String comentario;
 	@ManyToOne
 	@JoinColumn(name="idTurista")
 	private Turista turistaCreador;
 	private String email;
-	@ManyToOne
+	@ManyToOne 
 	@JoinColumn(name="codPoI")
 	private PoIs poiCreador;
 	

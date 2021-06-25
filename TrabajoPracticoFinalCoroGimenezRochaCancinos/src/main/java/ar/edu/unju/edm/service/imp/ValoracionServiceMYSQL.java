@@ -1,7 +1,6 @@
 
 package ar.edu.unju.edm.service.imp;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +36,10 @@ public class ValoracionServiceMYSQL implements IValoracionService {
 	public void eliminarValoracion(Integer idValoracion) throws Exception {
 		// TODO Auto-generated method stub
 		//Valoracion valoracionEliminar=valoracionDAO.findByIdValoracion(idValoracion).orElseThrow(()->new Exception("Valoracion no encontrada"));
-		Valoracion valoracionEliminar = valoracionDAO.findById(idValoracion).orElseThrow(()->new Exception("Valoracion no encontrada"));
-	    valoracionDAO.delete(valoracionEliminar);
+		/*Valoracion valoracionEliminar = valoracionDAO.findById(idValoracion).orElseThrow(()->new Exception("Valoracion no encontrada"));
+	    valoracionDAO.delete(valoracionEliminar);*/
+		System.out.println("entroooooooooaservice");
+		valoracionDAO.deleteById(idValoracion);
 	}
 
 	@Override
@@ -70,15 +71,27 @@ public class ValoracionServiceMYSQL implements IValoracionService {
 
 
 	@Override
-	public ArrayList<Valoracion> obtenerMisValoraciones(PoIs codPoI) {
+	public List<Valoracion> obtenerMisValoraciones(PoIs codPoI) {
 		// TODO Auto-generated method stub
-		return (ArrayList<Valoracion>) valoracionDAO.findAllByPoiCreador(codPoI);
+		return valoracionDAO.mostrarValoraciones(codPoI.getCodPoI());
 	}
 
 	@Override
-	public ArrayList<Valoracion> obtenerMioValoraciones(Turista turistaCreador) {
+	public List<Valoracion> obtenerMioValoraciones(Turista turistaCreador) {
 		// TODO Auto-generated method stub
-		return (ArrayList<Valoracion>) valoracionDAO.findAllByTuristaCreador(turistaCreador);
+		return valoracionDAO.mostrarValoracionesEnTurista(turistaCreador.getIdTurista());
+	}
+
+	@Override
+	public List<Valoracion> findAllByOrdenarValoracion() {
+		// TODO Auto-generated method stub
+		return valoracionDAO.findAllByOrdenarValoracion();
+	}
+
+	@Override
+	public List<Valoracion> findAllByOrdenarValoracion() {
+		// TODO Auto-generated method stub
+		return valoracionDAO.findAllByOrdenarValoracion();
 	}
 
 	
