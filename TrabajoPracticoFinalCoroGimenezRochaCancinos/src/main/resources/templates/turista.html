@@ -26,11 +26,13 @@
 				<div class="form-group row">
 					<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
 						<input type="text" id="nombre" th:field="*{nombre}" class="form-control">
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error</div>
 				</div>
 
 				<div class="form-group row">
 					<label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
 						<input type="text" id="apellido" th:field="*{apellido}" class="form-control">
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}">Error</div>
 				</div>
 
 				<div class="form-group row">
@@ -118,11 +120,13 @@
 				<div class="form-group row">
 					<label for="email" class="col-sm-2 col-form-label">Email</label>
 						<input type="email" id="email" th:field="*{email}" class="form-control">
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error</div>
 				</div>
 
 				<div class="form-group row">
 					<label for="password" class="col-sm-2 col-form-label" float = "left" >Contraseña</label>
 						<input type="password" id="password" th:field="*{password}" class="form-control">
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Error</div>
 				</div>
 
 				<input type="submit" class="btn btn-success btn-block"

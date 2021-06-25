@@ -178,9 +178,9 @@ public class ValoracionController {
 
 	@GetMapping({"/punto"})
 	public String cargarpunto(Model model){
-
 		model.addAttribute("pois", poiService.getOrdenarPorLaValoracion());
 		model.addAttribute("valoracion", valoracionService.crearUnaValoracion());
+		
 		return "punto";
 	}
 	@GetMapping({"/valoraciones/{codPoI}"})

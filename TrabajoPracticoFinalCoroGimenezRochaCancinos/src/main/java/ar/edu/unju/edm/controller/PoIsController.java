@@ -1,10 +1,9 @@
 package ar.edu.unju.edm.controller;
 
-
-
-
 import java.io.IOException;
 import java.util.Base64;
+
+import javax.validation.Valid;
 
 import org.apache.commons.logging.Log;
 
@@ -29,7 +28,6 @@ import ar.edu.unju.edm.model.Turista;
 import ar.edu.unju.edm.service.IPoIsService;
 import ar.edu.unju.edm.service.ITuristaService;
 import ar.edu.unju.edm.service.IValoracionService;
-
 
 @Controller
 public class PoIsController {
@@ -246,4 +244,5 @@ public String eliminarPoI(Model model, @PathVariable(name ="codPoI")Integer codP
 	}*/
 	
 }
+
 

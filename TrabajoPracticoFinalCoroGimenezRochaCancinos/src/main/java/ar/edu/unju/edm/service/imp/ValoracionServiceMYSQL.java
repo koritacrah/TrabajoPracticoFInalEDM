@@ -88,6 +88,12 @@ public class ValoracionServiceMYSQL implements IValoracionService {
 		return valoracionDAO.findAllByOrdenarValoracion();
 	}
 
+	@Override
+	public List<Valoracion> findAllByOrdenarValoracion() {
+		// TODO Auto-generated method stub
+		return valoracionDAO.findAllByOrdenarValoracion();
+	}
+
 	
 
 

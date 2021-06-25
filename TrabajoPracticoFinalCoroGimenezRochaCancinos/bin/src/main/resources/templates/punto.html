@@ -43,6 +43,7 @@
 					</a>
 				</div>
 
+
 				<div class="card-body">
 					<h5 class="card-title titulo" th:text="${p.nombre}">name</h5>
 					<p class="card-text" th:text="${p.descripcion}">descrip</p>
@@ -69,9 +70,9 @@
 					</div>
 
 
-
 					<a id="button" th:href="@{'/cargar_valoracion/'+${p.codPoI}}">crear valoracion</a>
 					<a id="button" th:href="@{'/valoraciones/'+${p.codPoI}}">ver valoraciones</a>
+
 					<p class="card-text" id="etiqueta"
 						th:text=" 'Pertenece la seccion ' +${p.etiqueta}">
 						<small class="text-muted">etiqueta</small>

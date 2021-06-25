@@ -19,5 +19,6 @@ public interface IValoracionService {
 	public Valoracion encontrarValoracionId(int idValoracion) throws Exception;
 	public List<Valoracion> obtenerMisValoraciones(PoIs poiCreador);
 	public List<Valoracion> obtenerMioValoraciones(Turista turistaCreador);
+
 	public List<Valoracion> findAllByOrdenarValoracion();
 }

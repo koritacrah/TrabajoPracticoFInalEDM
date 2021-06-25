@@ -28,4 +28,5 @@ public interface IValoracionDAO extends CrudRepository <Valoracion, Integer> {
 	public List<Valoracion> mostrarValoraciones(Integer  codigoPoI);
 	
 
+
 }
