@@ -6,6 +6,8 @@ package ar.edu.unju.edm.controller;
 import java.io.IOException;
 import java.util.Base64;
 
+import javax.validation.Valid;
+
 import org.apache.commons.logging.Log;
 
 import org.apache.commons.logging.LogFactory;
@@ -58,7 +60,7 @@ public class PoIsController {
 	}
 
 	@PostMapping(value="/poi/guardar", consumes = "multipart/form-data")
-	public String guardarNuevoPoI(@RequestParam("file") MultipartFile file, @RequestParam("file1") MultipartFile file1, @RequestParam("file2")  MultipartFile file2 , @ModelAttribute("poiGuardado") PoIs nuevoPoI, BindingResult resultado ,Model model,Authentication authentication)  throws IOException {
+	public String guardarNuevoPoI(@RequestParam("file") MultipartFile file, @RequestParam("file1") MultipartFile file1, @RequestParam("file2")  MultipartFile file2 ,  @Valid @ModelAttribute("poi") PoIs nuevoPoI, BindingResult resultado ,Model model,Authentication authentication)  throws IOException {
 		byte[] content = file.getBytes();
 		String base64 = Base64.getEncoder().encodeToString(content);
 		nuevoPoI.setImagen(base64);
@@ -75,7 +77,9 @@ public class PoIsController {
 		
 		if (resultado.hasErrors()) 
 		{
-			model.addAttribute("poiGuardado", nuevoPoI);
+			
+			model.addAttribute("poi", nuevoPoI);
+			model.addAttribute("editMode", "false");
 			return("cargarpoi");
 		}
 		else 

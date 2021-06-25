@@ -10,7 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
@@ -27,9 +28,10 @@ public class PoIs {
 	@Column
 	private String email;
 	@Column
+	@NotBlank (message="Su punto de interes debe tener nombre.")
 	private String nombre;
 	@Column
-	
+	@NotBlank (message="Su punto de interes debe tener descripcion.")
 	private String descripcion;
 	@Column
 	private String etiqueta;
@@ -41,14 +43,14 @@ public class PoIs {
 	private int numeroCasa;
 	@Column
 	private String barrio;
-
 	@Column
+	@NotBlank (message="Su punto de interes debe tener una localidad.")
 	private String localidad;
-	
 	@Column
+	@NotNull (message="debe indicar la longitud de su punto de interes")
 	private int localizacionLatitud;
-	
 	@Column
+	@NotNull (message="debe indicar la latitud de su punto de interes")
 	private int localizacionLongitud;
 	@Column
 	private int media;
