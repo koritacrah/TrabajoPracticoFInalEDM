@@ -24,4 +24,8 @@ public interface IValoracionDAO extends CrudRepository <Valoracion, Integer> {
 	@Query(value ="SELECT*FROM valoracion ORDER BY fecha_comentario DESC, hora_comentario DESC",nativeQuery=true)
 	public List<Valoracion> findAllByOrdenarValoracion();
 
+	@Query(value = "SELECT*FROM valoracion WHERE cod_poi =? ORDER BY fecha_comentario DESC, hora_comentario DESC;",nativeQuery=true)
+	public List<Valoracion> mostrarValoraciones(Integer  codigoPoI);
+	
+	//@Query(value = "SELECT * FROM valoracion WHERE codigo_poi = ?", nativeQuery = true)
 }

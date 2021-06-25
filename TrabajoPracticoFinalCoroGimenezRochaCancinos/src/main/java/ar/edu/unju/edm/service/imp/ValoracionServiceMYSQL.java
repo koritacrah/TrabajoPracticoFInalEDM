@@ -74,7 +74,7 @@ public class ValoracionServiceMYSQL implements IValoracionService {
 	@Override
 	public List<Valoracion> obtenerMisValoraciones(PoIs codPoI) {
 		// TODO Auto-generated method stub
-		return valoracionDAO.findAllByPoiCreador(codPoI);
+		return valoracionDAO.mostrarValoraciones(codPoI.getCodPoI());
 	}
 
 	@Override
