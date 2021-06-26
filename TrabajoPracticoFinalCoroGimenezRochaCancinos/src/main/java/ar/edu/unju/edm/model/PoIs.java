@@ -79,7 +79,7 @@ public class PoIs {
 	
 	
 	public double getUnaValoracion() {
-		return unaValoracion;
+		return unaValoracion ;
 	}
 	public void setUnaValoracion(double unaValoracion) {
 		this.unaValoracion = unaValoracion;

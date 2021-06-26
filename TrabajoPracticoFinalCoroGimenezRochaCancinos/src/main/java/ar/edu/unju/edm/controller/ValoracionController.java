@@ -2,6 +2,7 @@ package ar.edu.unju.edm.controller;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -57,12 +58,12 @@ public class ValoracionController {
 	    return ("misvaloraciones");
 	}
 	@PostMapping("/valoracion/guardar/{codPoI}")
-	public String guardarNuevoValoracion(@Valid @ModelAttribute("unaValoracion") Valoracion nuevaValoracion,@PathVariable(name="codPoI") Integer codigo,BindingResult resultado, Model model) {		
+	public String guardarNuevoValoracion(@Valid @ModelAttribute("valoracion") Valoracion nuevaValoracion,@PathVariable(name="codPoI") Integer codigo,BindingResult resultado, Model model) {		
 		//System.out.println(valoracionService.obtenerTodasValoraciones());
-		
 		if (resultado.hasErrors()) {	
-			
+			System.out.println("entro al error");
 			model.addAttribute("valoracion", nuevaValoracion);
+			model.addAttribute("editMode", "false");
 			return("cargar_valoracion");
 		} 
 		else {
@@ -143,14 +144,19 @@ public class ValoracionController {
 	public String eliminarPoI(Model model, @PathVariable(name ="idValoracion")Integer id) {
 		
 		try {
+			Authentication auth = SecurityContextHolder
+		            .getContext()
+		            .getAuthentication();
+		    UserDetails userTurista = (UserDetails) auth.getPrincipal();
+		    Turista turistaEncontrado = turistaService.encontrarUnTuristaPorEmail(userTurista.getUsername());
 			Valoracion encontradoValoracion=valoracionService.encontrarValoracionId(id);
 			System.out.println(encontradoValoracion.getPoiCreador().getCodPoI());
 			Integer codPoI=encontradoValoracion.getPoiCreador().getCodPoI();
 			PoIs poiEncontrado = poiService.encontrarUnPoi(codPoI);
 	    	poiEncontrado.setUnaValoracion(poiEncontrado.getUnaValoracion()-encontradoValoracion.getUnaValoracion());
-	    	System.out.println("entrooooooooo");
+	    	turistaEncontrado.setPuntos(turistaEncontrado.getPuntos()-13);
 			valoracionService.eliminarValoracion(id);
-			System.out.println("entrooooooooo1");
+			
 			}catch(Exception e){
 				model.addAttribute("listErrorMessage",e.getMessage());
 			}
@@ -170,11 +176,34 @@ public class ValoracionController {
 		}*/
 	@GetMapping({"/cargar_valoracion/{codPoI}"} )
 	public String cargarvalo(Model model,@PathVariable(name="codPoI") Integer id)throws Exception{
+		
 		PoIs poiEncontrado=poiService.encontrarUnPoi(id);
+		Authentication auth = SecurityContextHolder
+	            .getContext()
+	            .getAuthentication();
+	    UserDetails userTurista = (UserDetails) auth.getPrincipal();
+	    Turista turistaEncontrado = turistaService.encontrarUnTuristaPorEmail(userTurista.getUsername());
+		List<Valoracion> val=valoracionService.obtenerMisValoraciones(poiEncontrado);
+		for(int i=0;i<val.size();i++) {
+			if(val.get(i).getTuristaCreador().getIdTurista()==turistaEncontrado.getIdTurista()) {
+		return  "mensajevalo";
+				
+			}
+		}
 		model.addAttribute("poiEncontrado", poiEncontrado);
 		model.addAttribute("valoracion", valoracionService.crearUnaValoracion());
 		return "cargar_valoracion";
 	}
+	
+	
+	@GetMapping({"/mensaje/error"})
+		public String error(Model model){
+			
+			return "menasajevalo";
+		}
+	
+	
+	
 
 	@GetMapping({"/punto"})
 	public String cargarpunto(Model model){
