@@ -1,5 +1,7 @@
 package ar.edu.unju.edm.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.apache.commons.logging.Log;
@@ -35,7 +37,8 @@ public class TuristaController {
 	
 	@PostMapping("/turista/guardar")
 	public String guardarNuevoTurista(@Valid @ModelAttribute("unTurista") Turista nuevoTurista, BindingResult resultado ,Model model) {
-		
+		List<Turista> tur=turistaService.obtenerTodosTurista();
+		boolean band=true;
 		if (resultado.hasErrors()) 
 		{
 			model.addAttribute("unTurista", nuevoTurista);
@@ -43,12 +46,30 @@ public class TuristaController {
 		}
 		else 
 		{
-			LOGGER.info("METHOD: ingresando el metodo Guardar");
-			turistaService.guardarTurista(nuevoTurista);
+			for(int i=0;i<tur.size();i++) {
+				//if(tur.get(i).getEmail()!=nuevoTurista.getEmail()) 
+				if(tur.get(i).getEmail().compareTo(nuevoTurista.getEmail()) == 0) {
+					return  "mensajeturi";
+				}else {
+					band=false;
+				}
+				
+			}
+			if(band==false) {
+				LOGGER.info("METHOD: ingresando el metodo Guardar");
+				turistaService.guardarTurista(nuevoTurista);
+		
+			}
+			
+			
 			return "redirect:/index";
 		}
 	}
-	
+	@GetMapping({"/mensaje/error/tur"})
+	public String error(Model model){
+		
+		return "menasajeturi";
+	}
 	@GetMapping("/turista/perfiles")
 	public String cargarPerfilTuristas(Model model){
 		model.addAttribute("turistas", turistaService.obtenerTodosTurista());

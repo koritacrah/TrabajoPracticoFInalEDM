@@ -20,7 +20,9 @@
 		<div class="col-sm-2"></div>
 		<div class="col-sm-8">
 			<div class="card mb-3" id="carta">
-			<h1 th:text="${p.unaValoracion/p.valoracion.size()}" ></h1>
+			
+			<h1 th:text="${#numbers.formatDecimal(p.unaValoracion/p.valoracion.size(),1,2)}" class="fa fa-star"></h1>
+			
 				<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 					<div class="carousel-inner">
 						<div class="carousel-item active">
@@ -67,9 +69,7 @@
 
 						</div>
 					</div>
-
-
-
+			
 					<a id="button" th:href="@{'/cargar_valoracion/'+${p.codPoI}}">crear valoracion</a>
 					<a id="button" th:href="@{'/valoraciones/'+${p.codPoI}}">ver valoraciones</a>
 					<p class="card-text" id="etiqueta"

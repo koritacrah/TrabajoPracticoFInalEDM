@@ -6,7 +6,6 @@
 	<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
 	<link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.11.2/css/all.css}" />
 	<link th:rel="stylesheet" type="text/css" th:href="@{/css/nicoleestilos.css}" />
-
 	<meta charset="UTF-8">
 
 	<title>Turista</title>
@@ -14,7 +13,6 @@
 </head>
 
 <body class="body-home">
-
 	<div class="container">
 		<div class="reg-box">
 			<h1>Registrarse</h1>
@@ -114,7 +112,6 @@
 						<input type="number" th:field="*{localizacionLongitud}" class="form-control" id="longitud">
 				</div>
 				<input class="form-control" type=hidden th:field="*{email}" th:if="${editMode}">
-
 				<input class="form-control" type=hidden th:field="*{password}" th:if="${editMode}">
 
 				<input type="submit" class="btn btn-success btn-block"
