@@ -38,6 +38,10 @@ public class TuristaController {
 	@PostMapping("/turista/guardar")
 	public String guardarNuevoTurista(@Valid @ModelAttribute("unTurista") Turista nuevoTurista, BindingResult resultado ,Model model) {
 		List<Turista> tur=turistaService.obtenerTodosTurista();
+		if(tur.size()==0) {
+			LOGGER.info("METHOD: ingresando el metodo Guardar");
+			turistaService.guardarTurista(nuevoTurista);
+		}
 		boolean band=true;
 		if (resultado.hasErrors()) 
 		{
@@ -47,8 +51,10 @@ public class TuristaController {
 		else 
 		{
 			for(int i=0;i<tur.size();i++) {
+				
 				//if(tur.get(i).getEmail()!=nuevoTurista.getEmail()) 
 				if(tur.get(i).getEmail().compareTo(nuevoTurista.getEmail()) == 0) {
+					
 					return  "mensajeturi";
 				}else {
 					band=false;
@@ -56,6 +62,7 @@ public class TuristaController {
 				
 			}
 			if(band==false) {
+				System.out.println("entro a guardar");
 				LOGGER.info("METHOD: ingresando el metodo Guardar");
 				turistaService.guardarTurista(nuevoTurista);
 		
