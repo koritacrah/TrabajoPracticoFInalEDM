@@ -14,8 +14,9 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
@@ -35,6 +36,7 @@ public class PoIs {
 	@NotBlank (message="Su punto de interes debe tener nombre.")
 	private String nombre;
 	@Column
+	@NotBlank (message="Su punto de interes debe aportar una descripción.")
 	private String descripcion;
 	@Column
 	private String etiqueta;
@@ -50,15 +52,19 @@ public class PoIs {
 	@NotBlank (message="Su punto de interes debe tener una localidad.")
 	private String localidad;
 	@Column
-	@NotNull (message="debe indicar la longitud de su punto de interes")
+	@Min(value = 24, message = "La longitud de su punto de interes debe estar entre las medidad de jujuy (24 a 27)")
+	@Max(value = 27, message = "La longitud de su punto de interes debe estar entre las medidad de jujuy (24 a 27)")
 	private int localizacionLatitud;
 	@Column
-	@NotNull (message="debe indicar la latitud de su punto de interes")
+	@Min(value = 65, message = "La longitud de su punto de interes debe estar entre las medidad de jujuy (65 a 67)")
+	@Max(value = 67, message = "La longitud de su punto de interes debe estar entre las medidad de jujuy (65 a 67)")
 	private int localizacionLongitud;
 	@Column
 	private int media;
 	@Lob
+	
 	@Column(name = "prod_imagen", columnDefinition = "LONGBLOB")
+	@NotBlank (message="Su punto de interes debe tener una fotografia")
 	private String imagen;
 	@Lob
 	@Column(name = "prod_imagen1", columnDefinition = "LONGBLOB")

@@ -270,6 +270,7 @@ public String eliminarPoI(Model model, @PathVariable(name ="codPoI")Integer codP
 				if(turistaEncontrado.getPuntos()>=20) {
 					model.addAttribute("negativo", "false");
 					turistaEncontrado.setPuntos(turistaEncontrado.getPuntos()-20);
+					turistaService.guardarTurista(turistaEncontrado);
 				}else {
 					return "imposible";
 				}
@@ -302,6 +303,7 @@ public String eliminarPoI(Model model, @PathVariable(name ="codPoI")Integer codP
 				if(turistaEncontrado.getPuntos()>=30) {
 					model.addAttribute("negativo", "false");
 					turistaEncontrado.setPuntos(turistaEncontrado.getPuntos()-30);
+					turistaService.guardarTurista(turistaEncontrado);
 				}else {
 					return "imposible";
 				}

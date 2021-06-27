@@ -34,6 +34,7 @@
 			<label for="descrip" class="col-sm-2 col-form-label">Descripcion</label>
 			<textarea type="text" id="descrip" th:field="*{descripcion}" cols="50" rows="5"
 				class="col-form-label"></textarea>
+				<div class="alert alert-danger" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}">Error</div>
 		</div>
 
 
@@ -43,6 +44,7 @@
 			<div class="col-sm-4">
 				<input type="file" name="file" class="form-control-file" id="file"
 					accept="image/x-png,image/gif,image/jpeg,image/png,image/jpeg" onchange="loadFile(event)">
+					<div class="alert alert-danger" th:if="${#fields.hasErrors('imagen')}" th:errors="*{imagen}">Error</div>
 				<img id="output" style="padding-top: 2px; width: 146px;" />
 			</div>
 		</div>
@@ -90,8 +92,10 @@
 				<div class="form-group row acor">
 					<label for="lat" class="col-sm-1 col-form-label">Latitud (Nº)</label>
 					<input type="number" id="lat" th:field="*{localizacionLatitud}" class="form-control col-sm-2">
+					<div class="alert alert-danger" th:if="${#fields.hasErrors('localizacionLatitud')}" th:errors="*{localizacionLatitud}">Error</div>
 					<label for="long" class="col-sm-1 col-form-label">Longitud (Nº)</label>
 					<input type="number" id="long" th:field="*{localizacionLongitud}" class="form-control col-sm-2">
+					<div class="alert alert-danger" th:if="${#fields.hasErrors('localizacionLongitud')}" th:errors="*{localizacionLongitud}">Error</div>
 				</div>
 				<div class="form-group row">
 					<label for="lat" class="col-sm-1 col-form-label">Localidad</label>
