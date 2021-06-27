@@ -21,8 +21,8 @@
 		<div class="col-sm-8 poiss">
 			<div class="card mb-2" id="carta">
 			
-			<h1 th:text="${#numbers.formatDecimal(p.unaValoracion/p.valoracion.size(),1,2)}" class="fa fa-star estrella"></h1>
 			
+			<h5 class="card-title titulo" th:text="${p.nombre}">name</h5>
 				<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 					<div class="imagen carousel-inner ">
 						<div class="carousel-item active">
@@ -46,7 +46,8 @@
 				</div>
 
 				<div class="card-body">
-					<h5 class="card-title titulo" th:text="${p.nombre}">name</h5>
+					<h1 th:text="${#numbers.formatDecimal(p.unaValoracion/p.valoracion.size(),1,2)}" class="fa fa-star estrella"></h1>				
+					
 					<p class="card-text descripcion" th:text="${p.descripcion}">descrip</p>
 					
 					

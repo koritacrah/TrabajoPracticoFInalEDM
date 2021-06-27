@@ -1,10 +1,18 @@
 .body-home{
   font-family: "Open Sans", sans-serif;
-  height: 100vh;
-  background:url(https://www.sol915.com.ar/wp-content/uploads/2020/05/JUJUY.jpg);
-	background-size: cover;
-}
+  background: -webkit-linear-gradient(#8a262b, #e39d57);
 
+}
+.body-homem{
+  font-family: "Open Sans", sans-serif;
+  background: #8a262b;
+
+}
+.body-homemm{
+  font-family: "Open Sans", sans-serif;
+  background: #e39d57;
+
+}
 .body-index{
   font-family: "Open Sans", sans-serif;
   height: 100vh;

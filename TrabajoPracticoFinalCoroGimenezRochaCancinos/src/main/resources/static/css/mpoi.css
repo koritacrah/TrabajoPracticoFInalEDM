@@ -14,6 +14,7 @@
     background-size: cover;
     padding-right: 5%;
     padding-left: 5%;
+    border:3px solid black;
 }
 .estrella{
 	color:#dfe228;
@@ -24,6 +25,7 @@
 .poiss{
 	text-align:center;
 	 justify-content: center;
+	 
 }
 .imagen div img{
 	width: 320%;
@@ -34,7 +36,7 @@
 .titulos{
 	color: #E1E3E9;
 }
-.card-body h5{
+.card h5{
 	font-family: Vegur, 'PT Sans', Verdana, sans-serif;
 	text-align:center;
 	font-size:300%;
@@ -55,7 +57,7 @@
 	padding: 10px 24px;
 	font-size: 16px;
 		color: white;
-	background-color:#1b2073a3;
+	background: -webkit-linear-gradient(#8a262b, #e39d57);
 		justify-content:left;
 		text-align: left;
 
