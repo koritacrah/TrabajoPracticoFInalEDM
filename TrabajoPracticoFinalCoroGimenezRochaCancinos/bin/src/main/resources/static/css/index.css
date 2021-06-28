@@ -1,3 +1,7 @@
+.body-fondo{
+	background:url(https://www.sol915.com.ar/wp-content/uploads/2020/05/JUJUY.jpg);
+	background-size: cover;
+}
 
 
 .s{
@@ -44,6 +48,9 @@ article h3{
     margin-left: 20px;
     margin-bottom: 20px;
     margin-right: 20px;
+    color:white;
+     -webkit-text-stroke: 1px black;
+    
     
 }
 article{
@@ -55,7 +62,6 @@ aside{
 	margin-top: 1%;
     margin-left: 0%;
     color: white;
-    font-style: oblique;
     float: right;
     font-size: 3vw;
    	

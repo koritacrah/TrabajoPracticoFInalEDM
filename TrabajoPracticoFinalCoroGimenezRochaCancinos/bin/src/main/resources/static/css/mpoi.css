@@ -8,18 +8,56 @@
 
 }
 #carta{
-	background: #E1E3E9;
-	color: #8FAEC1;
+	background: #f8f9fa5e;
+    color: #030404;
+    font-family: Vegur, 'PT Sans', Verdana, sans-serif;
+    background-size: cover;
+    padding-right: 5%;
+    padding-left: 5%;
+    border:3px solid black;
+}
+.estrella{
+	color:#dfe228;
+	text-align:center;
+	-webkit-text-stroke: 1px black;
+	
+}
+.poiss{
+	text-align:center;
+	 justify-content: center;
+	 
+}
+.imagen div img{
+	width: 320%;
+}
+.botones{
+	text-align:center;
 }
 .titulos{
 	color: #E1E3E9;
+}
+.card h5{
+	font-family: Vegur, 'PT Sans', Verdana, sans-serif;
+	text-align:center;
+	font-size:300%;
+	text-decoration: underline black;        
+}
+.etiqueta{
+	text-align:center;
+	 text-transform: uppercase;
+}
+.link{
+	font-size:50%;
+}
+.descripcion{
+	border:1px solid black;
 }
 #button{ 
 	margin: 10px;
 	padding: 10px 24px;
 	font-size: 16px;
 		color: white;
-	background-color: #8FAEC1;
+	background: -webkit-linear-gradient(#8a262b, #e39d57);
 		justify-content:left;
 		text-align: left;
 
@@ -33,9 +71,7 @@ label{
 	
 	
 }
-#etiqueta{
-	text-align: left;
-}
+
 p.valoracion {
   position: relative;
   overflow: hidden;
