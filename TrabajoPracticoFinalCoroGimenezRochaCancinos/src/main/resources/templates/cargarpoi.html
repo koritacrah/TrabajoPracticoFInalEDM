@@ -44,7 +44,8 @@
 			<div class="col-sm-4">
 				<input type="file" name="file" class="form-control-file" id="file"
 					accept="image/x-png,image/gif,image/jpeg,image/png,image/jpeg" onchange="loadFile(event)">
-					<div class="alert alert-danger" th:if="${#fields.hasErrors('imagen')}" th:errors="*{imagen}">Error</div>
+
+
 				<img id="output" style="padding-top: 2px; width: 146px;" />
 			</div>
 		</div>

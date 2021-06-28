@@ -62,9 +62,7 @@ public class PoIs {
 	@Column
 	private int media;
 	@Lob
-	
 	@Column(name = "prod_imagen", columnDefinition = "LONGBLOB")
-	@NotBlank (message="Su punto de interes debe tener una fotografia")
 	private String imagen;
 	@Lob
 	@Column(name = "prod_imagen1", columnDefinition = "LONGBLOB")
