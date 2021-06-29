@@ -58,10 +58,12 @@ public class ValoracionController {
 	    return ("misvaloraciones");
 	}
 	@PostMapping("/valoracion/guardar/{codPoI}")
-	public String guardarNuevoValoracion(@Valid @ModelAttribute("valoracion") Valoracion nuevaValoracion,@PathVariable(name="codPoI") Integer codigo,BindingResult resultado, Model model) {		
+	public String guardarNuevoValoracion(@Valid @ModelAttribute("valoracion") Valoracion nuevaValoracion,BindingResult resultado,@PathVariable(name="codPoI") Integer codigo, Model model) throws Exception {		
 		//System.out.println(valoracionService.obtenerTodasValoraciones());
 		if (resultado.hasErrors()) {	
+			PoIs poiEncontrado=poiService.encontrarUnPoi(codigo);
 			System.out.println("entro al error");
+			model.addAttribute("poiEncontrado", poiEncontrado);
 			model.addAttribute("valoracion", nuevaValoracion);
 			model.addAttribute("editMode", "false");
 			return("cargar_valoracion");
