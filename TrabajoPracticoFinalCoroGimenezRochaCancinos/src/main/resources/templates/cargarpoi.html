@@ -4,6 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<link th:rel="stylesheet" type="text/css" th:href="@{/css/poi.css}" />
+	<link th:rel="stylesheet" type="text/css" th:href="@{/css/mpoi.css}" />
 	<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
 	<link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.11.2/css/all.css} " />
 	<link th:rel="stylesheet" type="text/css" th:href="@{/css/nicoleestilos.css}" />
@@ -87,7 +88,7 @@
 		</div>
 
 		<div class="accordion" id="accordionExample">
-			<a class=" ub btn btn-primary " data-toggle="collapse" href="#multiCollapseExample1" role="button"
+			<a class=" ub btn " id="button" data-toggle="collapse" href="#multiCollapseExample1" role="button"
 				aria-expanded="true" aria-controls="multiCollapseExample1">Ubicacion</a>
 			<div class="collapse multi-collapse acor" id="multiCollapseExample1">
 				<div class="form-group row acor">
