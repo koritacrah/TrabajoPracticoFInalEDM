@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,10 +44,23 @@ public class Turista {
 	private int puntos;
 	@Column
 	private String perfil;
-	@OneToMany(mappedBy = "turistaAutor", fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
-
+	@Column
+	@OneToMany(mappedBy = "turistaAutor", cascade = CascadeType.REMOVE)
     private List<PoIs> pois;
 	
+	@OneToMany(mappedBy = "turistaCreador",cascade = CascadeType.REMOVE)
+    private List<Valoracion> lasValoraciones;
+	
+
+
+	public List<Valoracion> getLasValoraciones() {
+		return lasValoraciones;
+	}
+
+	public void setLasValoraciones(List<Valoracion> lasValoraciones) {
+		this.lasValoraciones = lasValoraciones;
+	}
+
 	public List<PoIs> getPois() {
 		return pois;
 	}

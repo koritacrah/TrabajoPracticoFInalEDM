@@ -25,16 +25,14 @@ public class LoginTuristaServiceImp implements UserDetailsService{
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		// metodo que nos devuelve detalles de un usuario
-		System.out.println("ccccccccccccccccc");
 		Turista turistaEncontrado = iTuristaDAO.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("Usuario inválido"));
 		
 		//generamos una lista de autorizaciones
 		List<GrantedAuthority> tipos = new ArrayList<>();
-		System.out.println("fffffffffffffffff"+turistaEncontrado.getPerfil());
+		System.out.println(turistaEncontrado.getPerfil());
 		
 		//generamos tipo de autorizaciones
 		GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(turistaEncontrado.getPerfil());
-		System.out.println("ddddddddddddddd");
 		tipos.add(grantedAuthority);
 		
 		

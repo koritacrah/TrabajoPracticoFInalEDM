@@ -9,13 +9,15 @@ import org.springframework.stereotype.Service;
 
 import ar.edu.unju.edm.model.Turista;
 import ar.edu.unju.edm.repository.ITuristaDAO;
+import ar.edu.unju.edm.service.IPoIsService;
 import ar.edu.unju.edm.service.ITuristaService;
 
 @Service
 @Qualifier("implementacionMYSQLturista")
 
 public class TuristaServiceMYSQL implements ITuristaService {
-
+	@Autowired
+	IPoIsService poiService;
 	@Autowired
 	Turista unTurista;
 	@Autowired

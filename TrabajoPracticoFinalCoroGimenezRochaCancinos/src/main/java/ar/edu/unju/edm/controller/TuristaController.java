@@ -18,8 +18,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import ar.edu.unju.edm.model.PoIs;
 import ar.edu.unju.edm.model.Turista;
+import ar.edu.unju.edm.model.Valoracion;
+import ar.edu.unju.edm.service.IPoIsService;
 import ar.edu.unju.edm.service.ITuristaService;
+import ar.edu.unju.edm.service.IValoracionService;
 
 @Controller
 public class TuristaController {
@@ -28,7 +32,12 @@ public class TuristaController {
 	@Autowired
 	@Qualifier("implementacionMYSQLturista")
 	ITuristaService turistaService;
-	
+	@Autowired
+	@Qualifier("implementacionMYSQLValoracion")
+	IValoracionService valoracionService;
+	@Autowired
+	@Qualifier("implementacionMYSQLPoI")
+	IPoIsService poiService;
 	@GetMapping("/turista/mostrar")
 	public String cargarTurista(Model model) {
 		model.addAttribute("unTurista", turistaService.crearTurista());
@@ -124,7 +133,28 @@ public class TuristaController {
 	@GetMapping("/turista/eliminarTurista/{idTurista}")
 	public String eliminarTurista(Model model, @PathVariable(name="idTurista") Integer idTurista) {
 		LOGGER.info("METHOD: ingresando el metodo Eliminar");
+		List<PoIs> pois=poiService.obtenerTodosPoIs();
+		List<Valoracion> val=valoracionService.obtenerTodasValoracion();
+	    
 		try {
+			
+			for(int i=0;i<val.size();i++) {
+				System.out.println("entro a i");
+				if(val.get(i).getTuristaCreador().getIdTurista()==idTurista) {
+					for(int o=0;o<pois.size();o++) {
+						System.out.println("entro a o");
+						if(pois.get(o).getCodPoI()==val.get(i).getPoiCreador().getCodPoI()) {
+							pois.get(o).setUnaValoracion(pois.get(o).getUnaValoracion()-val.get(i).getUnaValoracion());
+							
+						}
+						
+						
+					}
+					
+					
+				}
+					
+				}
 			turistaService.eliminarTurista(idTurista);		
 		}
 		catch(Exception e){

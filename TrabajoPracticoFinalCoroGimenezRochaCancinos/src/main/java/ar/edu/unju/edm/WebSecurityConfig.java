@@ -13,6 +13,9 @@ import ar.edu.unju.edm.service.imp.LoginTuristaServiceImp;
 
 @Configuration
 @EnableWebSecurity
+/*El @EnableWebSecurityes una anotación de marcador. 
+Permite que Spring encuentre (es un @Configurationy, por lo tanto, @Component) 
+y aplique automáticamente la clase al global WebSecurity.*/
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Autowired
